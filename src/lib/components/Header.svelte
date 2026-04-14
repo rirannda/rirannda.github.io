@@ -3,7 +3,7 @@
 	import { page } from '$app/state';
 
 	const currentPrompt = $derived(
-		'[visitor@Folix] ~/portfolio' + (page.url.pathname == '/' ? '' : page.url.pathname) + '$'
+		'visitor@Folix: ~/portfolio' + (page.url.pathname == '/' ? '' : page.url.pathname) + '$ '
 	);
 
 	let menuOpen = $state(false);
@@ -25,7 +25,8 @@
 </script>
 
 <header class="relative flex items-center bg-blue-900 p-4 py-7 text-white">
-	<a href={resolve('/')} aria-label="GotoTop" class="truncate pr-4">{currentPrompt}</a>
+	<a href={resolve('/')} aria-label="GotoTop" class="truncate pr-4 font-mono">{currentPrompt}</a>
+	<!--トップにジャンプ機能(未実装)-->
 
 	<nav class="ml-auto hidden items-center gap-6 md:flex" aria-label="Global navigation">
 		{#each links as link (link.href)}

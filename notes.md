@@ -68,3 +68,7 @@ Rebooting PortfolioOS v0.0.0 ...
 - body
   - pages(About,Projects,Skills,etc.)
 - command input box
+
+## 未実装
+
+- [ ] HeaderのGoToTop機能と装飾

@@ -5,8 +5,8 @@ export type TerminalLine = {
 };
 
 class TerminalState {
-    history = $state<string[]>([]); // ↑↓キーで呼び出す用の履歴
-    output = $state<TerminalLine[]>([]); // 画面に表示されるログ
+    history = $state<string[]>([]); // ↑↓キーで呼び出す用の履歴を保持
+    output = $state<TerminalLine[]>([]); // 画面に表示されるログを保持
 
     pushOutput(command: string, response: string | string[], isError = false) {
         this.output.push({ command, response, isError });
