@@ -1,6 +1,8 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+	import { os } from '$lib/state/osState.svelte';
 	// 本物っぽい起動ログの配列
-	const bootMessages = [
+	const rebootMessages = [
 		'[ OK ] Stopped svelte.service.',
 		'[ OK ] Stopped typescript.service.',
 		'[ OK ] Stopped portfolio.service.',
@@ -19,24 +21,28 @@
 		let currentIndex = 0;
 		let timeoutId: ReturnType<typeof setTimeout> | null = null;
 		const interval = setInterval(() => {
-			if (currentIndex < bootMessages.length - 1) {
-				visibleLines.push(bootMessages[currentIndex]);
+			if (currentIndex < rebootMessages.length - 1) {
+				visibleLines.push(rebootMessages[currentIndex]);
 				visibleLines = visibleLines;
 				currentIndex++;
-			} else if (currentIndex === bootMessages.length - 1) {
+			} else if (currentIndex === rebootMessages.length - 1) {
 				// 最後のメッセージだけ0.3秒待ってから表示
 				clearInterval(interval);
 				timeoutId = setTimeout(() => {
-					visibleLines.push(bootMessages[bootMessages.length - 1]);
+					visibleLines.push(rebootMessages[rebootMessages.length - 1]);
 					visibleLines = visibleLines;
 				}, 300);
 				currentIndex++;
+				setTimeout(async () => {
+					window.location.href = resolve('/'); // ルートにリダイレクトして再起動を模倣
+				}, 1500);
 			}
 		}, 150); // 0.15秒ごとに次の行を表示（お好みで調整）
 
 		return () => {
 			clearInterval(interval);
 			if (timeoutId) clearTimeout(timeoutId);
+			os.setRebooting(false);
 		};
 	});
 </script>

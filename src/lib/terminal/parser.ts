@@ -1,6 +1,7 @@
 import { goto } from "$app/navigation";
 import { resolve } from "$app/paths";
 import { terminal } from "$lib/state/terminalState.svelte";
+import { os } from "$lib/state/osState.svelte";
 
 export async function parseCommand(input: string, Path: string) {
     // 空白で分割（連続する空白にも対応させるなら正規表現 /\s+/ が便利です）
@@ -44,10 +45,7 @@ export async function parseCommand(input: string, Path: string) {
         case 'uname':
             return { response: 'Folix' };
         case 'reboot':
-            terminal.setRebooting(true);
-            setTimeout(async () => {
-                window.location.href = resolve('/'); // ルートにリダイレクトして再起動を模倣
-            }, 3000);
+            os.setRebooting(true);
             return { response: 'Broadcast message from system: System is going down for reboot NOW!' };
         default:
             return { response: `Command not found: ${command}`, isError: true };

@@ -4,13 +4,18 @@
 	import Header from '$lib/components/Header.svelte';
 	import Terminal from '$lib/components/Terminal.svelte';
 	import RebootScreen from '$lib/components/RebootScreen.svelte';
-	import { terminal } from '$lib/state/terminalState.svelte';
+	import BootingScreen from '$lib/components/BootingScreen.svelte';
+	import { os } from '$lib/state/osState.svelte';
 
 	let { children } = $props();
+	os.setBooting(true);
+	os.setRebooting(false);
 </script>
 
 <svelte:head><link rel="icon" href={favicon} /></svelte:head>
-{#if terminal.isRebooting}
+{#if os.isBooting}
+	<BootingScreen />
+{:else if os.isRebooting}
 	<RebootScreen />
 {:else}
 	<Header />
