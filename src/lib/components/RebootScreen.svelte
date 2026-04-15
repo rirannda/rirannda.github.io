@@ -47,9 +47,9 @@
 	});
 </script>
 
-<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-green-500">
+<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-white">
 	{#each visibleLines as line, i (i)}
 		<div class="">{line}</div>
 	{/each}
-	<div class="mt-2 h-4 w-2 bg-green-500"></div>
+	<div class="mt-2 h-4 w-2 bg-white"></div>
 </div>

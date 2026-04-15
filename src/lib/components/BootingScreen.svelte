@@ -21,6 +21,7 @@
 				clearInterval(interval);
 				// 全てのメッセージが出終わったら、少し待ってからメイン画面へ
 				visibleLines.push('Loading ...');
+				visibleLines.push('　');
 				setTimeout(() => {
 					visibleLines.push('Welcome to my portfolio!');
 				}, 750);
@@ -28,7 +29,7 @@
 				if (!os.isRebooting) {
 					setTimeout(() => {
 						os.setBooting(false);
-					}, 1750);
+					}, 1900);
 				}
 			}
 		}, 250); // 0.25秒ごとに次の行を表示（お好みで調整）
@@ -37,9 +38,9 @@
 	});
 </script>
 
-<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-green-500">
+<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-white">
 	{#each visibleLines as line, i (i)}
 		<div class="">{line}</div>
 	{/each}
-	<div class="mt-2 h-4 w-2 bg-green-500"></div>
+	<div class="mt-2 h-4 w-2 bg-white"></div>
 </div>
