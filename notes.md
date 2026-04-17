@@ -75,4 +75,4 @@ Rebooting PortfolioOS v0.0.0 ...
 - [ ] レスポンシブ対応
 - [ ] コマンド自動補完
 - [ ] darkテーマのcss
-- [ ] `help (commands)`や`(command) -h`,`(command) --help`
+- [x] `help (commands)`や`(command) -h`,`(command) --help`
