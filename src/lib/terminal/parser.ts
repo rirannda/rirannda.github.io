@@ -54,7 +54,7 @@ export async function parseCommand(input: string, Path: string) {
     if (options.length > 0 && !(command in noOptionCommands)) {
         return { response: `The '${command}' command does not take any options. Usage: ${noOptionCommands[command] || 'No usage information available.'}`, isError: true };
     }
-    if (args.length > 0 && noArgumentsCommands.has(command)) {
+    if (args.length === 1 && args[0] !== '' && noArgumentsCommands.has(command)) {
         return { response: `The '${command}' command does not take any arguments.`, isError: true };
     }
 
