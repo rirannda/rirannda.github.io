@@ -11,6 +11,10 @@ async function getHelpText(command: string) {
     return { response: text || `No help available for '${command}'.` };
 }
 
+export const availableCommands = ['help', 'echo', 'cd', 'ls', 'pwd', 'reset', 'whoami', 'date', 'uname', 'reboot', 'sudo', 'su', 'theme', 'fakefetch', 'welcome'];
+
+export const availableDirs = ['about', 'projects', 'skills'];
+
 export async function parseCommand(input: string, Path: string) {
     // 空白で分割（連続する空白にも対応させるなら正規表現 /\s+/ が便利です）
     const tokens = input.trim().split(/\s+/);
@@ -170,20 +174,24 @@ export async function parseCommand(input: string, Path: string) {
             os.setRebooting(true);
             return { response: 'Broadcast message from system: System is going down for reboot NOW!' };
         case 'sudo':
+            // 引数がない場合 (argsが [''] のみの場合)
+            if (args.length === 1 && args[0] === '') {
+                return { response: `Usage: sudo [command]` };
+            }
             return { response: 'sudo: visitor is not in the sudoers file. This incident will not be reported.' };
         case 'su':
             return { response: 'su: permission denied' };
         case 'fakefetch':
             return {
                 response: [
-                    " ********   *******   **       ** **     **   visitor@Folix",
-                    '/**/////   **/////** /**      /**//**   **    -------------',
-                    '/**       **     //**/**      /** //** **     OS: PortfoliOS Folix web edition',
-                    '/******* /**      /**/**      /**  //***      Host: Web Browser',
-                    '/**////  /**      /**/**      /**   **/**     Kernel: Folix 0.0.1',
-                    `/**      //**     ** /**      /**  ** //**    Theme: ${theme.isDark ? 'Dark' : 'Light'}`,
-                    '/**       //*******  /********/** **   //**   Developer: gorirari',
-                    '//         ///////   //////// // //     //    ',
+                    " ********    *******    **        **  **     **    visitor@Folix",
+                    '/**/////    **/////**  /**       /** //**   **     -------------',
+                    '/**        **     //** /**       /**  //** **      OS: PortfoliOS Folix web edition',
+                    '/*******  /**      /** /**       /**   //***       Host: Web Browser',
+                    '/**////   /**      /** /**       /**    **/**      Kernel: Folix 0.0.1',
+                    `/**       //**     **  /**       /**   ** //**     Theme: ${theme.isDark ? 'Dark' : 'Light'}`,
+                    '/**        //*******   /******** /**  **   //**    Developer: rirannda',
+                    '//          ///////    ////////  //  //     //     ',
                 ]
             };
         case 'theme': {

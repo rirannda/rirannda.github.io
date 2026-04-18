@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { terminal } from '$lib/state/terminalState.svelte';
 	import { page } from '$app/state';
-	import { parseCommand } from '$lib/terminal/parser';
+	import { availableDirs, parseCommand } from '$lib/terminal/parser';
+	import { availableCommands as commands } from '$lib/terminal/parser';
 
 	let inputValue = $state('');
 	let historyIndex = $state(-1);
@@ -14,6 +15,45 @@
 	const latest = $derived(terminal.output[terminal.output.length - 1]);
 
 	function handleKeydown(event: KeyboardEvent) {
+		if (event.key === 'Tab') {
+			event.preventDefault();
+			if (!inputValue) return;
+
+			let tokens = inputValue.split(/\s+/);
+
+			if (
+				tokens.length === 1 &&
+				(tokens[0] === 'cd' || tokens[0] === 'ls' || tokens[0] === 'theme')
+			) {
+				tokens.push(' ');
+			}
+
+			if (tokens.length === 1) {
+				const prefix = tokens[0];
+				const matches = commands.filter((cmd: string) => cmd.startsWith(prefix));
+				if (matches.length === 1) {
+					inputValue = matches[0] + ' ';
+				}
+			}
+			if (tokens.length === 2) {
+				const command = tokens[0];
+				const prefix = tokens[1];
+
+				let targets: string[] = [];
+
+				if (command === 'cd' || command === 'ls') {
+					targets = availableDirs;
+				} else if (command === 'theme') {
+					targets = ['light', 'dark'];
+				}
+
+				const matches = targets.filter((t) => t.startsWith(prefix));
+				if (matches.length === 1) {
+					// 候補が1つなら元のコマンドとくっつけて補完
+					inputValue = `${command} ${matches[0]}`;
+				}
+			}
+		}
 		if (terminal.history.length === 0) {
 			return;
 		}
@@ -42,7 +82,12 @@
 		if (input) {
 			terminal.pushHistory(input); // Historyに保存
 			const result = await parseCommand(input, currentPath);
-			terminal.pushOutput(currentPrompt, input, result.response, result.isError);
+			terminal.pushOutput(
+				currentPrompt,
+				input,
+				result.response,
+				'isError' in result ? result.isError : false
+			);
 		}
 		inputValue = '';
 		historyIndex = -1;
