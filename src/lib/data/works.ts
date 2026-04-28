@@ -1,7 +1,7 @@
 export type Work = {
     id: string;
     name: string;
-    image: string;     // スクリーンショットのパス
+    images: string[];     // スクリーンショットのパス
     description: string;
     tech: { color: string; label: string }[]
     repoUrl: string;
@@ -12,7 +12,7 @@ export const worksData: Work[] = [
     {
         id: 'portfolio-os',
         name: 'PortfoliOS',
-        image: '/images/portfolio.png',
+        images: ['/images/portfolio.png'],
         description: 'SvelteKitとTailwind CSSで構築したCUI風のポートフォリオサイト。',
         tech: [
             { color: 'svelte', label: ' Svelte' },
@@ -25,7 +25,7 @@ export const worksData: Work[] = [
     {
         id: 'app-a',
         name: 'Awesome App A',
-        image: '/images/app-a.png',
+        images: ['/images/app-a.png'],
         description: 'Reactで作ったすごいアプリ。',
         tech: [
             { color: 'react', label: ' React' },
@@ -37,7 +37,7 @@ export const worksData: Work[] = [
     {
         id: 'tool-b',
         name: 'Convenient Tool B',
-        image: '/images/tool-b.png',
+        images: ['/images/tool-b.png'],
         description: 'Pythonで作った便利なスクリプト。',
         tech: [
             { color: 'python', label: ' Python' }

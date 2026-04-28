@@ -4,6 +4,8 @@
 	import { fade } from 'svelte/transition';
 	import { worksData } from '$lib/data/works';
 	import { resolve } from '$app/paths';
+	import { skillsData } from '$lib/data/skills';
+	import WorkCard from '$lib/components/WorkCard.svelte';
 
 	const quotes = [
 		'Stay Hungry, Stay Foolish - Steve Jobs',
@@ -141,29 +143,7 @@
 		<p class="text-lg">取り組んできたプロジェクトの一部です。</p>
 		<div class="my-6 grid grid-cols-1 flex-col gap-6 md:grid-cols-2">
 			{#each featuredWorks as work, i (i)}
-				<div class="grid rounded border border-gray-700 p-4 dark:border-gray-500">
-					<img src={work.image} alt={`Screenshot of ${work.name}`} />
-					<div class="row-2">
-						<h3 class="text-2xl font-bold">{work.name}</h3>
-						<p class="mt-2 grow text-lg">{work.description}</p>
-					</div>
-					<div class="row-3 my-2">
-						{#each work.tech as tech, i (i)}
-							<span
-								class={`bg-${tech.color} mx-1 rounded-full px-2 py-1 font-mono text-lg  text-gray-700 dark:text-[#e4e4e4] `}
-							>
-								{tech.label}
-							</span>
-						{/each}
-					</div>
-					<a
-						href={work.repoUrl}
-						target="_blank"
-						class="row-4 mt-2 flex h-10 items-center justify-center rounded border px-2 pr-3 font-[NerdFont] hover:shadow hover:shadow-white/90"
-						rel="noreferrer noopener external"
-						><span class="py-1 pr-3 text-2xl"></span>View on GitHub</a
-					>
-				</div>
+				<WorkCard {work} />
 			{/each}
 		</div>
 		<a
@@ -174,18 +154,17 @@
 	</section>
 	<section id="skills" class="scroll-mt-21 pb-5">
 		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Skills</h2>
+		<p class="text-lg">現在までに習得した技術スタック</p>
 		<div class="pt-2 text-lg md:p-2">
-			<p>ここにSkillsの内容を移動します。</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
-			<p>skill</p>
+			<div class="grid rounded border border-gray-700 p-4 dark:border-gray-500">
+				{#each skillsData as skill, i (i)}
+					<div>
+						<div class="">{skill.logo}</div>
+						<h3 class="text-2xl font-bold">{skill.name}</h3>
+						<p class="mt-2 grow text-lg">{skill.description}</p>
+					</div>
+				{/each}
+			</div>
 		</div>
 	</section>
 	<section id="contact" class="scroll-mt-21 pb-5">

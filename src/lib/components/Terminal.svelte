@@ -122,7 +122,7 @@
 
 <svelte:window bind:innerWidth />
 
-<div id="terminalWrapper" class="sticky right-0 bottom-0">
+<div id="terminalWrapper" class="sticky right-0 bottom-0 z-100">
 	{#if isExpanded}
 		<div
 			class={`${!terminal.isLineExpanded ? 'hidden' : ''} fixed top-16 right-0 bottom-16 left-0 z-50 mt-1 overflow-x-auto overflow-y-auto bg-gray-200/90 p-3 font-mono text-sm text-black transition-colors duration-300 md:top-18 md:bottom-10 md:p-5 md:text-base dark:bg-[#0c0c0c]/90 dark:text-[#e4e4e4]`}
