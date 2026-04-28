@@ -150,7 +150,7 @@
 					<div class="row-3 my-2">
 						{#each work.tech as tech, i (i)}
 							<span
-								class="mx-1 rounded-full bg-blue-200 px-2 py-1 font-mono text-lg dark:bg-blue-900"
+								class={`bg-${tech.color} mx-1 rounded-full px-2 py-1 font-mono text-lg  text-gray-700 dark:text-[#e4e4e4] `}
 							>
 								{tech.label}
 							</span>

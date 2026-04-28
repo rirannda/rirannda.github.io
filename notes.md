@@ -14,7 +14,7 @@
     - [x]`whoami`で名前
     - [x]`date`で現在時刻
     - [x]`uname`:PortfolioOS
-    - [ ]`open github`などでgithubを別タブで開いたり
+    - [x]`open github`などでgithubを別タブで開いたり
     - [x]`neofetch`AAが作れれば
     - [x]`reboot`で演出を入れてからリロード
     - [x]`theme light`or`dark`でテーマ切り替え(これもバーガーメニュー内にもボタン)
@@ -72,7 +72,7 @@ Rebooting PortfolioOS v0.0.0 ...
 ## 未実装
 
 - [x] HeaderのGoToTop機能と装飾
-- [ ] レスポンシブ対応
+- [x] レスポンシブ対応
 - [x] コマンド自動補完
 - [x] darkテーマのcss
 - [x] `help (commands)`や`(command) -h`,`(command) --help`

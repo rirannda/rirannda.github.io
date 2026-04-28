@@ -15,9 +15,9 @@ export const worksData: Work[] = [
         image: '/images/portfolio.png', // ※実際のパスに合わせてください
         description: 'SvelteKitとTailwind CSSで構築したCUI風のポートフォリオサイト。',
         tech: [
-            { color: '#ff4000', label: ' Svelte' },
-            { color: '#01bbff', label: '󱏿 Tailwind CSS' },
-            { color: '#3577c4', label: ' TypeScript' }
+            { color: 'svelte', label: ' Svelte' },
+            { color: 'tailwind', label: '󱏿 Tailwind CSS' },
+            { color: 'typescript', label: ' TypeScript' }
         ],
         repoUrl: 'https://github.com/rirannda/portfolio',
         isFeatured: true // トップページに出したいのでtrue
@@ -28,8 +28,8 @@ export const worksData: Work[] = [
         image: '/images/app-a.png',
         description: 'Reactで作ったすごいアプリ。',
         tech: [
-            { color: '#59c3db', label: ' React' },
-            { color: '#3577c4', label: ' TypeScript' }
+            { color: 'react', label: ' React' },
+            { color: 'typescript', label: ' TypeScript' }
         ],
         repoUrl: 'https://github.com/rirannda/app-a',
         isFeatured: true
@@ -40,7 +40,7 @@ export const worksData: Work[] = [
         image: '/images/tool-b.png',
         description: 'Pythonで作った便利なスクリプト。',
         tech: [
-            { color: '#fed34d', label: ' Python' }
+            { color: 'python', label: ' Python' }
         ],
         repoUrl: 'https://github.com/rirannda/tool-b',
         isFeatured: false // これはWorksページにだけ出す

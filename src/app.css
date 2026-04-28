@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-svelte: #ff4000;
+	--color-tailwind: #01bbff;
+	--color-typescript: #3577c4;
+	--color-python: #fed34d;
+	--color-react: #59c3db;
+}
+
+@layer utilities {
+	.bg-svelte {
+		background-color: var(--color-svelte);
+	}
+	.bg-tailwind {
+		background-color: var(--color-tailwind);
+	}
+	.bg-typescript {
+		background-color: var(--color-typescript);
+	}
+	.bg-python {
+		background-color: var(--color-python);
+	}
+	.bg-react {
+		background-color: var(--color-react);
+	}
+}

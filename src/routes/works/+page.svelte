@@ -61,14 +61,16 @@
 		</p>
 		<div class="my-6 grid grid-cols-1 flex-col gap-6 md:grid-cols-2">
 			{#each worksData as work, i (i)}
-				<div class="flex-col rounded border border-gray-700 p-4 dark:border-gray-500">
-					<h3 class="text-2xl font-bold">{work.name}</h3>
-					<img src={work.image} alt="Screenshot of {work.name}" />
-					<p class="mt-2 grow text-lg">{work.description}</p>
+				<div class="grid rounded border border-gray-700 p-4 dark:border-gray-500">
+					<img src={work.image} alt={`Screenshot of {work.name}`} />
+					<div class="row-2">
+						<h3 class="text-2xl font-bold">{work.name}</h3>
+						<p class="mt-2 grow text-lg">{work.description}</p>
+					</div>
 					<div class="row-3 my-2">
 						{#each work.tech as tech, i (i)}
 							<span
-								class="mx-1 rounded-full bg-blue-200 px-2 py-1 font-mono text-lg dark:bg-blue-900"
+								class={`bg-${tech.color} mx-1 rounded-full px-2 py-1 font-mono text-lg  text-gray-700 dark:text-[#e4e4e4] `}
 							>
 								{tech.label}
 							</span>
@@ -77,7 +79,7 @@
 					<a
 						href={work.repoUrl}
 						target="_blank"
-						class="mt-2 inline-block rounded border px-2 pr-3 text-center font-[NerdFont] hover:shadow hover:shadow-white/90"
+						class="row-4 mt-2 inline-block rounded border px-2 pr-3 text-center font-[NerdFont] hover:shadow hover:shadow-white/90"
 						rel="noreferrer noopener external"><span class="pr-3 text-2xl"></span>View on GitHub</a
 					>
 				</div>

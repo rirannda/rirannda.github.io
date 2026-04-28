@@ -48,11 +48,3 @@
 .animate-blink {
 	animation: blink 2s steps(1) infinite;
 }
-
-@theme {
-	--color-svelte: #ff4000;
-	--color-tailwind: #01bbff;
-	--color-typescript: #3577c4;
-	--color-python: #fed34d;
-	--color-react: #59c3db;
-}
