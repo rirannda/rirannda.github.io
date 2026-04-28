@@ -62,7 +62,7 @@
 		<div class="my-6 grid grid-cols-1 flex-col gap-6 md:grid-cols-2">
 			{#each worksData as work, i (i)}
 				<div class="grid rounded border border-gray-700 p-4 dark:border-gray-500">
-					<img src={work.image} alt={`Screenshot of {work.name}`} />
+					<img src={work.image} alt={`Screenshot of ${work.name}`} />
 					<div class="row-2">
 						<h3 class="text-2xl font-bold">{work.name}</h3>
 						<p class="mt-2 grow text-lg">{work.description}</p>
@@ -79,8 +79,9 @@
 					<a
 						href={work.repoUrl}
 						target="_blank"
-						class="row-4 mt-2 inline-block rounded border px-2 pr-3 text-center font-[NerdFont] hover:shadow hover:shadow-white/90"
-						rel="noreferrer noopener external"><span class="pr-3 text-2xl"></span>View on GitHub</a
+						class="row-4 mt-2 flex h-10 items-center justify-center rounded border px-2 pr-3 font-[NerdFont] hover:shadow hover:shadow-white/90"
+						rel="noreferrer noopener external"
+						><span class="py-1 pr-3 text-2xl"></span>View on GitHub</a
 					>
 				</div>
 			{/each}

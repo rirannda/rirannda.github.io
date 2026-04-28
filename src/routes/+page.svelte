@@ -136,13 +136,13 @@
 			<p>学友会執行部で...</p>
 		</div>
 	</section>
-	<section id="featured" class="scroll-mt-21 pb-5">
+	<section id="featured" class="mb-5 scroll-mt-21 pb-10">
 		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Featured-Projects</h2>
-		<p>取り組んできたプロジェクトの一部です。</p>
+		<p class="text-lg">取り組んできたプロジェクトの一部です。</p>
 		<div class="my-6 grid grid-cols-1 flex-col gap-6 md:grid-cols-2">
 			{#each featuredWorks as work, i (i)}
 				<div class="grid rounded border border-gray-700 p-4 dark:border-gray-500">
-					<img src={work.image} alt={`Screenshot of {work.name}`} />
+					<img src={work.image} alt={`Screenshot of ${work.name}`} />
 					<div class="row-2">
 						<h3 class="text-2xl font-bold">{work.name}</h3>
 						<p class="mt-2 grow text-lg">{work.description}</p>
@@ -159,13 +159,18 @@
 					<a
 						href={work.repoUrl}
 						target="_blank"
-						class="row-4 mt-2 inline-block rounded border px-2 pr-3 text-center font-[NerdFont] hover:shadow hover:shadow-white/90"
-						rel="noreferrer noopener external"><span class="pr-3 text-2xl"></span>View on GitHub</a
+						class="row-4 mt-2 flex h-10 items-center justify-center rounded border px-2 pr-3 font-[NerdFont] hover:shadow hover:shadow-white/90"
+						rel="noreferrer noopener external"
+						><span class="py-1 pr-3 text-2xl"></span>View on GitHub</a
 					>
 				</div>
 			{/each}
 		</div>
-		<a href={resolve('/works')} class="rounded border px-2 py-1">すべてのプロジェクトを見る</a>
+		<a
+			href={resolve('/works')}
+			class="rounded border border-green-500 bg-green-500/10 px-4 py-3 hover:bg-green-500/85"
+			>すべてのプロジェクトを見る</a
+		>
 	</section>
 	<section id="skills" class="scroll-mt-21 pb-5">
 		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Skills</h2>

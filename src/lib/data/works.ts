@@ -12,7 +12,7 @@ export const worksData: Work[] = [
     {
         id: 'portfolio-os',
         name: 'PortfoliOS',
-        image: '/images/portfolio.png', // ※実際のパスに合わせてください
+        image: '/images/portfolio.png',
         description: 'SvelteKitとTailwind CSSで構築したCUI風のポートフォリオサイト。',
         tech: [
             { color: 'svelte', label: ' Svelte' },
@@ -20,7 +20,7 @@ export const worksData: Work[] = [
             { color: 'typescript', label: ' TypeScript' }
         ],
         repoUrl: 'https://github.com/rirannda/portfolio',
-        isFeatured: true // トップページに出したいのでtrue
+        isFeatured: true
     },
     {
         id: 'app-a',
@@ -28,7 +28,7 @@ export const worksData: Work[] = [
         image: '/images/app-a.png',
         description: 'Reactで作ったすごいアプリ。',
         tech: [
-            { color: 'react', label: ' React' },
+            { color: 'react', label: ' React' },
             { color: 'typescript', label: ' TypeScript' }
         ],
         repoUrl: 'https://github.com/rirannda/app-a',
@@ -43,6 +43,6 @@ export const worksData: Work[] = [
             { color: 'python', label: ' Python' }
         ],
         repoUrl: 'https://github.com/rirannda/tool-b',
-        isFeatured: false // これはWorksページにだけ出す
+        isFeatured: false
     }
 ];
