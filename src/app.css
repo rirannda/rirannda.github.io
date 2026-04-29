@@ -4,7 +4,7 @@
 	--color-html: #e44c20;
 	--color-typescript: #3577c4;
 	--color-javascript: #f6df1f;
-	--color-css: #264ee4;
+	--color-css: #673299;
 	--color-python: #fed34d;
 	--color-rust: #e43616;
 	--color-svelte: #ff4000;
@@ -201,4 +201,53 @@
 	.border-tailwind {
 		border-color: var(--color-tailwind);
 	}
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+	font-family: 'NerdFont';
+	src: url('fonts/HackNerdFont-Regular.ttf') format('truetype');
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+
+	/* ライトモードの時の変数 */
+	:root {
+		--bg-color: #fafafa;
+		--text-color: #222222;
+	}
+
+	/* ダークモードの時の変数 */
+	.dark {
+		--bg-color: #1e1e1e;
+		--text-color: #e4e4e4;
+	}
+
+	/* bodyタグ全体にその変数を適用する */
+	body {
+		background-color: var(--bg-color);
+		color: var(--text-color);
+		/* Tailwindのtransitionクラスをつけておくと、テーマ切り替え時にフワッと色が変わってオシャレです */
+		@apply transition-colors duration-300;
+	}
+}
+
+@keyframes blink {
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+	25%,
+	75% {
+		opacity: 0;
+	}
+}
+
+.animate-blink {
+	animation: blink 2s steps(1) infinite;
 }

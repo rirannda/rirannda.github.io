@@ -104,7 +104,7 @@
 </script>
 
 <div
-	class="mx-auto max-w-screen flex-col justify-center gap-10 px-10 pt-30 text-left align-baseline md:max-w-3/5"
+	class="gap-10 px-10 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
 >
 	<section id="top" class="mb-50 scroll-mt-31 pt-40 md:mb-75 md:pt-50">
 		<p class="font-mono text-xl text-green-600 dark:text-green-400">Hi, my name is</p>
@@ -112,7 +112,7 @@
 		<p class="my-3 text-4xl">O.M.U.C.T. Student.</p>
 		{#if quoteVisible}
 			<p
-				class="text-gray-[#222222]/70 py-5 font-serif text-2xl italic transition-opacity duration-200 dark:text-[#e4e4e4]/70"
+				class="py-5 font-serif text-2xl text-black italic transition-opacity duration-200 dark:text-[#e4e4e4]/70"
 				transition:fade
 			>
 				{currentQuote}
@@ -120,13 +120,13 @@
 		{/if}
 		<div class="pt-5">
 			<a
-				class="mb-4 block w-fit rounded-2xl border border-amber-600 bg-amber-600/10 px-5 py-4 font-[NerdFont] text-lg font-bold transition-all duration-150 hover:bg-amber-600/85 md:mr-3 md:inline"
+				class="mb-4 rounded-2xl border-amber-600 bg-amber-600/10 px-5 py-4 text-lg font-bold hover:bg-amber-600/85 md:mr-3 md:inline block w-fit border font-[NerdFont] transition-all duration-150"
 				href="#featured"
 			>
 				View projects 
 			</a>
 			<a
-				class="bg-archlinux/10 border-archlinux hover:bg-archlinux/95 block w-fit rounded-2xl border px-5 py-4 font-[NerdFont] text-lg font-bold transition-all duration-150 md:inline"
+				class="bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-2xl px-5 py-4 text-lg font-bold md:inline block w-fit border font-[NerdFont] transition-all duration-150"
 				href="#contact"
 			>
 				Contact me
@@ -134,48 +134,46 @@
 		</div>
 	</section>
 	<section id="about" class="scroll-mt-31 pb-5">
-		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">About Me</h2>
-		<div class="flex md:px-6">
-			<span class="h-auto w-1 rounded-full bg-green-500 text-green-500">|</span>
-			<div class="flex-col px-2 py-1 md:ml-1">
-				<p class="hidden w-fit text-xl md:inline">
-					大阪公立大学工業高等専門学校 知能情報コース 2年生
+		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">About Me</h2>
+		<div class="md:px-6 flex">
+			<span class="w-1 bg-green-500 text-green-500 h-auto rounded-full">|</span>
+			<div class="px-2 py-1 md:ml-1 flex-col">
+				<p class="text-xl md:inline hidden w-fit">
+					大阪公立大学工業高等専門学校 知能情報コース/ 2年生
 				</p>
-				<p class="w-fit text-xl md:hidden">大阪公立大学工業高等専門学校</p>
-				<p class="w-fit text-xl md:hidden">知能情報コース 2年生</p>
-				<p class="w-fit text-xl">学友会執行部 所属</p>
-			</div>
-			<div>
-				<p>Linux user</p>
+				<p class="text-xl md:hidden w-fit">大阪公立大学工業高等専門学校</p>
+				<p class="text-xl md:hidden w-fit">知能情報コース/ 2年生</p>
+				<p class="text-xl w-fit">学友会執行部 所属</p>
 			</div>
 		</div>
+
 		<div class="pt-2 text-lg md:p-2">
 			<p>知能情報コースで...</p>
 			<p>学友会執行部で...</p>
 		</div>
 	</section>
 	<section id="featured" class="mb-5 scroll-mt-21 pb-10">
-		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Featured-Projects</h2>
+		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Featured-Projects</h2>
 		<p class="text-lg">取り組んできたプロジェクトの一部です。</p>
-		<div class="my-6 grid grid-cols-1 flex-col gap-6 md:grid-cols-2">
+		<div class="my-6 gap-6 md:grid-cols-2 grid grid-cols-1 flex-col">
 			{#each featuredWorks as work, i (i)}
 				<WorkCard {work} />
 			{/each}
 		</div>
 		<a
 			href={resolve('/works')}
-			class="rounded border border-green-500 bg-green-500/10 px-4 py-3 hover:bg-green-500/85"
+			class="rounded border-green-500 bg-green-500/10 px-4 py-3 hover:bg-green-500/85 border"
 			>すべてのプロジェクトを見る</a
 		>
 	</section>
 	<section id="skills" class="scroll-mt-21 pb-5">
-		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Skills</h2>
+		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Skills</h2>
 		<p class="text-lg">現在までに習得した技術スタック</p>
-		<div class="my-6 flex flex-wrap gap-3 md:px-2">
+		<div class="my-6 gap-3 md:px-2 flex flex-wrap">
 			{#each skillFilters as filter, i (i)}
 				<button
 					onclick={() => (activeSkillFilter = filter)}
-					class={`cursor-pointer rounded-full border px-4 py-1 font-mono  font-bold transition-all duration-300 ${
+					class={`px-4 py-1 font-mono font-bold cursor-pointer rounded-full  border transition-all duration-300 ${
 						activeSkillFilter === filter
 							? 'border-green-500 bg-green-500 text-black dark:text-[#0c0c0c]' // 選択中
 							: 'border-gray-500 text-gray-600 hover:border-green-500 hover:text-green-500 dark:text-gray-400' // 非選択
@@ -199,7 +197,7 @@
 
 		<div class="pt-2 text-lg md:p-2">
 			<div
-				class="grid grid-cols-1 gap-8 rounded border border-gray-700 p-4 md:grid-cols-4 dark:border-gray-500"
+				class="gap-8 rounded border-gray-700 p-4 md:grid-cols-4 dark:border-gray-500 grid grid-cols-1 border"
 			>
 				{#each filteredSkills as skill (skill.id)}
 					<SkillCard {skill} />
@@ -208,7 +206,7 @@
 		</div>
 	</section>
 	<section id="contact" class="scroll-mt-21 pb-5">
-		<h2 class="mb-4 border-b border-green-500 text-4xl font-bold md:text-5xl">Contact</h2>
+		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Contact</h2>
 		<div class="pt-2 text-lg md:p-2">
 			<p>contact</p>
 			<p>contact</p>
