@@ -13,7 +13,7 @@ export const worksData: Work[] = [
         id: 'portfolio-os',
         name: 'PortfoliOS',
         images: ['/images/portfolio.png'],
-        description: 'SvelteKitとTailwind CSSで構築したCUI風のポートフォリオサイト。',
+        description: '本ポートフォリオサイト。Svelte5で実装。コマンドラインから実際にサイト内を操作できるギミックを搭載しました。',
         tech: [
             { color: 'svelte', label: ' Svelte' },
             { color: 'tailwind', label: '󱏿 Tailwind CSS' },
