@@ -52,7 +52,7 @@
 <svelte:window bind:innerWidth />
 
 <header
-	class="fixed z-50 flex w-full items-center justify-center border-b-3 border-b-[#08c] bg-[#333333] p-5 py-5 text-white transition-colors duration-300 md:h-max md:w-full md:p-5 md:py-5"
+	class="border-b-archlinux fixed z-50 flex w-full items-center justify-center border-b-3 bg-[#333333] p-5 py-5 text-white transition-colors duration-300 md:h-max md:w-full md:p-5 md:py-5"
 >
 	<a
 		href={resolve('/')}
@@ -67,7 +67,7 @@
 		{#each links as link (link.id)}
 			<a
 				href={resolve(`/#${link.id}`)}
-				class="relative inline-block transition-colors before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-[#08c] before:transition-transform before:duration-300 before:content-[''] hover:text-white/80 hover:before:scale-x-100"
+				class="before:bg-archlinux relative inline-block transition-colors before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:transition-transform before:duration-300 before:content-[''] hover:text-white/80 hover:before:scale-x-100"
 				class:font-bold={isActiveLink(link.id)}>{link.label}</a
 			>
 		{/each}
@@ -76,7 +76,7 @@
 	<button
 		type="button"
 		onclick={toggleTheme}
-		class="hidden rounded-xl border border-[#08c] py-1 pr-2.5 pl-1.5 text-center font-[NerdFont] whitespace-pre outline-0 md:inline md:py-2 md:pr-4.5 md:pl-3.5"
+		class="border-archlinux hidden rounded-xl border py-1 pr-2.5 pl-1.5 text-center font-[NerdFont] whitespace-pre outline-0 md:inline md:py-2 md:pr-4.5 md:pl-3.5"
 	>
 		{theme.isDark ? '  Light' : '  Dark'}
 	</button>
@@ -107,7 +107,7 @@
 	{#if menuOpen}
 		<nav
 			id="mobile-menu"
-			class="absolute top-full left-0 z-10 mt-0.75 flex w-full flex-col items-center border-b-2 border-b-[#08c] bg-[#333333]/95 p-4 transition-all"
+			class="border-b-archlinux absolute top-full left-0 z-10 mt-0.75 flex w-full flex-col items-center border-b-2 bg-[#333333]/95 p-4 transition-all"
 			aria-label="Mobile navigation"
 		>
 			{#each links as link (link.id)}
@@ -122,7 +122,7 @@
 				<button
 					type="button"
 					onclick={toggleTheme}
-					class="mt-1 rounded-xl border border-[#08c] py-1 pr-2.5 pl-1.5 text-center font-[NerdFont] whitespace-pre outline-0"
+					class="border-archlinux mt-1 rounded-xl border py-1 pr-2.5 pl-1.5 text-center font-[NerdFont] whitespace-pre outline-0"
 				>
 					{theme.isDark ? '  Light' : '  Dark'}
 				</button>

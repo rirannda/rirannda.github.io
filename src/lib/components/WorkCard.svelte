@@ -20,7 +20,7 @@
 </script>
 
 <div
-	class="group z-20 flex flex-col overflow-hidden rounded-2xl border border-gray-300 bg-white/50 backdrop-blur-sm transition-all hover:border-[#08c] dark:border-gray-700 dark:bg-black/20"
+	class="group hover:border-archlinux z-20 flex flex-col overflow-hidden rounded-2xl border border-gray-300 bg-white/50 backdrop-blur-sm transition-all dark:border-gray-700 dark:bg-black/20"
 >
 	{#if work.images && work.images.length > 0}
 		<div
