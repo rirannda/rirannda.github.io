@@ -122,39 +122,6 @@ export const skillsData: Skill[] = [
         color: 'nodejs'
     },
     {
-        id: 'windows',
-        logo: '',
-        name: 'Windows',
-        level: '中級',
-        description: '基本的な操作やトラブルシューティングの経験あり。',
-        group: 'Tools',
-        url: 'https://www.microsoft.com/ja-jp/windows',
-        urltext: 'Windows Official Site',
-        color: 'windows'
-    },
-    {
-        id: 'linux',
-        logo: '',
-        name: 'Linux',
-        level: '中級',
-        description: '基本的なコマンド操作やシェルスクリプトの作成経験あり。',
-        group: 'Tools',
-        url: 'https://www.kernel.org/',
-        urltext: 'Linux Kernel Official Site',
-        color: 'linux'
-    },
-    {
-        id: 'archlinux',
-        logo: '',
-        name: 'Arch Linux',
-        level: '中級',
-        description: '日常的に使用しているLinuxディストリビューション。',
-        group: 'Tools',
-        url: 'https://archlinux.org/',
-        urltext: 'Arch Linux Official Site',
-        color: 'archlinux'
-    },
-    {
         id: 'vscode',
         logo: '',
         name: 'VS Code',
