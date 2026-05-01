@@ -60,16 +60,16 @@
 	<a
 		href={resolve('/')}
 		aria-label="GotoTop"
-		class="ml-1 min-w-0 pr-2 md:text-lg font-mono md:mr-auto md:ml-5 md:pr-4 font-bold flex truncate outline-0"
+		class="ml-1 min-w-0 pr-2 md:text-lg font-mono md:mr-auto md:ml-5 md:pr-4 flex grow truncate outline-0"
 	>
 		{#if isNarrow}
 			<span>{compactPrompt[0]}</span>
-			<span class="text-vscode">{compactPrompt[1]}</span>
-			<span>{compactPrompt[2]}</span>
+			<span class="text-vscode font-bold">{compactPrompt[1]}</span>
+			<span class="font-bold">{compactPrompt[2]}</span>
 		{:else}
-			<span class="text-green-400">{defaultPrompt[0]}</span>
+			<span class="text-green-400 font-bold">{defaultPrompt[0]}</span>
 			<span>{defaultPrompt[1]}</span>
-			<span class="text-vscode">{defaultPrompt[2]}</span>
+			<span class="text-vscode font-bold">{defaultPrompt[2]}</span>
 			<span>{defaultPrompt[3]}</span>
 		{/if}
 		<span id="cursor" class="animate-blink ml-2 bg-white pr-1 pl-1.5 font-normal h-6 align-middle"
