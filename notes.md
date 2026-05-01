@@ -79,5 +79,5 @@ Rebooting PortfolioOS v0.0.0 ...
 - [x] 内容の1ファイル化(スクロールですべての情報を見れるように、コマンドもそこに飛ぶように：プロジェクトは詳細を別ページで置いても良いかも)
 - [x] ターミナル入力ラインの最小化(起動時はヘッダーと内容とコマンドライン出現ボタンのみ、出現ボタンでコマンドラインと履歴最大化ボタンを配置して出現ボタンを隠す)
 - [ ] lang=EN(優先度低)
-- [ ] update works(tite,images,discriptions,etc...)
-- [ ] featured,works内でスクリーンショットをスライドショーにする
+- [ ] update works(title,images,discriptions,etc...)
+- [x] featured,works内でスクリーンショットをスライドショーにする
