@@ -1,42 +1,21 @@
-# sv
+# rirannda's Portfolio (PortfoliOS)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Please access from [my portfolio website](https://rirannda.github.io).
 
-## Creating a project
+## About This
 
-If you're seeing this, you've probably already done this step. Congrats!
+ターミナル風のCUIインターフェースを備えた、ポートフォリオサイトです。
+通常のスクロールやクリックによる操作に加え、画面下部のコマンドラインからUNIXライクなコマンドを入力してサイト内を操作できるギミックを搭載しています。
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech Stack
 
-To recreate this project with the same configuration:
+* **Framework:** [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+* **Package Manager:** pnpm
+* **Testing:** Vitest
+* **Deployment:** GitHub Pages (via GitHub Actions)
 
-```sh
-# recreate this project
-pnpm dlx sv@0.13.0 create --template minimal --types ts --add prettier eslint tailwindcss="plugins:none" --install pnpm .
-```
+## Special Thanks
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+"PortfoliOS" was compiled with inspiration from countless developers in the open-source world.
+Respect and gratitude to all the creators who publish their brilliant portfolios and code. You guys are the real root users!

@@ -56,5 +56,9 @@ export const helpTexts: Record<string, string | string[]> = {
     open: [
         "Usage: open <url>",
         "Opens the specified URL in a new tab."
+    ],
+    thanks: [
+        "Usage: thanks",
+        "Displays a message expressing gratitude to the developer community."
     ]
 };

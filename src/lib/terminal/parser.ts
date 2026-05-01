@@ -11,7 +11,7 @@ async function getHelpText(command: string) {
     return { response: text || `No help available for '${command}'.` };
 }
 
-export const availableCommands = ['help', 'echo', 'cd', 'ls', 'pwd', 'reset', 'whoami', 'date', 'uname', 'reboot', 'sudo', 'su', 'theme', 'fakefetch', 'welcome', 'open'];
+export const availableCommands = ['help', 'echo', 'cd', 'ls', 'pwd', 'reset', 'whoami', 'date', 'uname', 'reboot', 'sudo', 'su', 'theme', 'fakefetch', 'welcome', 'open', 'thanks'];
 
 export const availableDirs = ['top', 'about', 'featured', 'skills', 'contact', 'works'];
 
@@ -39,8 +39,9 @@ export async function parseCommand(input: string, Path: string) {
         'fakefetch': 'fakefetch',
         'welcome': 'welcome',
         'open': 'open [target]',
+        'thanks': 'thanks'
     };
-    const noArgumentsCommands = new Set(['reset', 'whoami', 'date', 'uname', 'reboot', 'fakefetch', 'welcome']);
+    const noArgumentsCommands = new Set(['reset', 'whoami', 'date', 'uname', 'reboot', 'fakefetch', 'welcome', 'thanks']);
 
 
     for (let i = 1; i < tokens.length; i++) { // tokensのうち最初の要素(コマンド)以外を処理
@@ -70,7 +71,7 @@ export async function parseCommand(input: string, Path: string) {
             {
                 // 引数がない場合 (argsが [''] のみの場合)
                 if (args.length === 1 && args[0] === '') {
-                    return { response: 'Available commands: help, cd, date, echo, fakefetch, ls, pwd, reboot, reset, uname, welcome, whoami, open' };
+                    return { response: 'Available commands: help, cd, date, echo, fakefetch, ls, pwd, reboot, reset, uname, welcome, whoami, open, thanks' };
                 }
 
                 const combinedHelpTexts: string[] = [];
@@ -229,29 +230,36 @@ export async function parseCommand(input: string, Path: string) {
                     "Feel free to explore and have fun!"
                 ]
             };
-        case 'open': {
-            if (args.length > 1) {
-                return { response: `open: too many arguments. Usage: open [target]`, isError: true };
-            }
-            if (args.length === 0) {
-                return { response: `Usage: open [target]`, isError: true };
-            }
-            const target = args[0].toLowerCase();
-            const links: Record<string, string> = {
-                'github': 'https://github.com/rirannda',
-                'discord': 'https://discord.com/users/924197940103372831',
+        case 'open':
+            {
+                if (args.length > 1) {
+                    return { response: `open: too many arguments. Usage: open [target]`, isError: true };
+                }
+                if (args.length === 0) {
+                    return { response: `Usage: open [target]`, isError: true };
+                }
+                const target = args[0].toLowerCase();
+                const links: Record<string, string> = {
+                    'github': 'https://github.com/rirannda',
+                    'discord': 'https://discord.com/users/924197940103372831',
+                };
+                const textTarget: Record<string, string> = {
+                    'github': 'Opening GitHub.com ...',
+                    'discord': 'Opening Discord.com ...',
+                };
+                if (target in links) {
+                    window.open(links[target], '_blank');
+                    return { response: `${textTarget[target]}` };
+                } else {
+                    return { response: `open: unknown target '${target}'. Available targets: ${Object.keys(links).join(', ')}`, isError: true };
+                }
             };
-            const textTarget: Record<string, string> = {
-                'github': 'Opening GitHub.com ...',
-                'discord': 'Opening Discord.com ...',
+        case 'thanks':
+            return {
+                response: [
+                    "Inspired by the amazing dev community. Thank you to all creators who share their code and ideas!",
+                ]
             };
-            if (target in links) {
-                window.open(links[target], '_blank');
-                return { response: `${textTarget[target]}` };
-            } else {
-                return { response: `open: unknown target '${target}'. Available targets: ${Object.keys(links).join(', ')}`, isError: true };
-            }
-        }
         default:
             return { response: `Command not found: ${command}`, isError: true };
     }

@@ -270,5 +270,5 @@
 }
 
 .animate-blink {
-	animation: blink 2s steps(1) infinite;
+	animation: blink 3s steps(1) infinite;
 }

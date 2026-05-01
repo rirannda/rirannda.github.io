@@ -5,15 +5,20 @@
 	import { theme } from '$lib/state/themeState.svelte';
 	import { langState, toggleLang } from '$lib/state/langState.svelte';
 
-	const currentPrompt = $derived(
-		'visitor@PortfoliOS:~/portfolio' +
-			(terminal.currentPath == '/' ? '' : terminal.currentPath) +
-			'$ '
-	);
+	let innerWidth = $state(1024);
+	const isNarrow = $derived(innerWidth < 420);
+
+	const defaultPrompt = $derived([
+		'visitor@PortfoliOS',
+		':',
+		`~/portfolio${terminal.currentPath == '/' ? '' : terminal.currentPath}`,
+		'$ cd ~/portfolio/top'
+	]);
+
 	const compactPrompt = $derived.by(() => {
 		const path = terminal.currentPath === '/' ? '/top' : terminal.currentPath;
 		const last = path.split('/').filter(Boolean).pop() ?? 'top';
-		return ` ...${last == 'top' ? '/portfolio/' : '/portfolio/' + last}$ cd top`;
+		return ['...', last == 'top' ? '/portfolio' : '/portfolio/' + last, '$ cd top'];
 	});
 
 	function toggleTheme() {
@@ -21,9 +26,6 @@
 	}
 
 	let menuOpen = $state(false);
-
-	let innerWidth = $state(1024);
-	const isNarrow = $derived(innerWidth < 420);
 
 	function toggleMenu() {
 		menuOpen = !menuOpen;
@@ -58,10 +60,20 @@
 	<a
 		href={resolve('/')}
 		aria-label="GotoTop"
-		class="ml-1 min-w-0 pr-2 font-mono md:mr-auto md:ml-5 md:pr-4 flex-1 truncate outline-0"
+		class="ml-1 min-w-0 pr-2 md:text-lg font-mono md:mr-auto md:ml-5 md:pr-4 font-bold flex truncate outline-0"
 	>
-		{isNarrow ? compactPrompt : `${currentPrompt} cd ~/portfolio/top`}
-		<span id="cursor" class="animate-blink ml-1 bg-white px-1"></span>
+		{#if isNarrow}
+			<span>{compactPrompt[0]}</span>
+			<span class="text-vscode">{compactPrompt[1]}</span>
+			<span>{compactPrompt[2]}</span>
+		{:else}
+			<span class="text-green-400">{defaultPrompt[0]}</span>
+			<span>{defaultPrompt[1]}</span>
+			<span class="text-vscode">{defaultPrompt[2]}</span>
+			<span>{defaultPrompt[3]}</span>
+		{/if}
+		<span id="cursor" class="animate-blink ml-2 bg-white pr-1 pl-1.5 font-normal h-6 align-middle"
+		></span>
 	</a>
 
 	<nav class="mr-5 gap-6 md:flex ml-auto hidden items-center" aria-label="Global navigation">
