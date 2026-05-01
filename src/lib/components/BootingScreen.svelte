@@ -2,8 +2,8 @@
 	import { os } from '$lib/state/osState.svelte';
 	// 本物っぽい起動ログの配列
 	const bootMessages = [
-		"　Booting `PortfolioOS Folix'",
-		'　',
+		"  Booting `PortfolioOS Folix'",
+		' ',
 		'Loading Kernel Folix ...',
 		'Loading My Portfolio ...'
 	];
@@ -21,7 +21,7 @@
 				clearInterval(interval);
 				// 全てのメッセージが出終わったら、少し待ってからメイン画面へ
 				visibleLines.push('Loading ...');
-				visibleLines.push('　');
+				visibleLines.push(' ');
 				setTimeout(() => {
 					visibleLines.push('Welcome to my portfolio!');
 				}, 750);
@@ -38,9 +38,9 @@
 	});
 </script>
 
-<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-white">
+<div class="inset-0 bg-black p-6 font-mono text-white fixed z-9999 flex flex-col">
 	{#each visibleLines as line, i (i)}
-		<div class="">{line}</div>
+		<div class="whitespace-pre">{line}</div>
 	{/each}
 	<div class="mt-2 h-4 w-2 bg-white"></div>
 </div>

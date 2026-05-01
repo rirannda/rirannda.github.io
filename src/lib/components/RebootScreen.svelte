@@ -10,7 +10,7 @@
 		'[ OK ] Reached target Unmount All Filesystems.',
 		'[ OK ] Reached target Shutdown.',
 		'[ OK ] Started Reboot.',
-		'　',
+		' ',
 		'Rebooting PortfolioOS v0.0.0 ...'
 	];
 
@@ -47,9 +47,9 @@
 	});
 </script>
 
-<div class="fixed inset-0 z-9999 flex flex-col bg-black p-6 font-mono text-white">
+<div class="inset-0 bg-black p-6 font-mono text-white fixed z-9999 flex flex-col">
 	{#each visibleLines as line, i (i)}
-		<div class="">{line}</div>
+		<div class="whitespace-pre">{line}</div>
 	{/each}
 	<div class="mt-2 h-4 w-2 bg-white"></div>
 </div>
