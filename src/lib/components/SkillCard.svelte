@@ -159,14 +159,15 @@
 <svelte:window onkeydown={handleKeydown} />
 
 <button
-	class={`group rounded-lg border-gray-300 bg-white/50 p-5 backdrop-blur-sm flex w-full cursor-pointer flex-col border text-left outline-0 transition-all ${skillColors.hoverBorder} dark:border-gray-700 dark:bg-black/20`}
+	class={`group rounded-lg border-gray-300 bg-white/50 md:p-5 p-2.5 backdrop-blur-sm flex w-full cursor-pointer flex-col border text-left outline-0 transition-all ${skillColors.hoverBorder} dark:border-gray-700 dark:bg-black/20`}
 	onclick={openModal}
 >
-	<div class="mb-4 gap-4 flex items-center">
-		<span class={`text-4xl font-[NerdFont] transition-colors ${skillColors.hoverText}`}
+	<div class="mb-4 md:gap-4 gap-1 flex items-center">
+		<span
+			class={`md:text-4xl text-2xl pr-2 md:pr-0 font-[NerdFont] transition-colors ${skillColors.hoverText}`}
 			>{skill.logo}</span
 		>
-		<h3 class={`text-xl font-bold font-mono transition-colors ${skillColors.hoverText}`}>
+		<h3 class={`md:text-xl text-lg font-bold font-mono transition-colors ${skillColors.hoverText}`}>
 			{skill.name}
 		</h3>
 	</div>

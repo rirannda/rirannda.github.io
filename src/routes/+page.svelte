@@ -118,9 +118,9 @@
 </script>
 
 <div
-	class="gap-10 px-10 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
+	class="gap-10 md:px-10 px-5 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
 >
-	<section id="top" class="mb-50 scroll-mt-31 pt-40 md:mb-75 md:pt-50">
+	<section id="top" class="mb-55 scroll-mt-31 pt-40 md:mb-75 md:pt-50">
 		<p class="font-mono text-xl text-green-600 dark:text-green-400">Hi, my name is</p>
 		<h1 class="text-6xl font-bold md:my-3 md:text-9xl">Rirannda</h1>
 		<p class="my-3 text-4xl">O.M.U.C.T. Student.</p>
@@ -162,9 +162,9 @@
 		</div>
 
 		<div class="pt-2 text-lg md:p-2">
-			<p>知能情報コースでAIなどの最新技術や実践的なプログラミングを学んでいます。</p>
-			<p>学友会執行部ではWeb開発に関わりつつ行事の企画・運営に携わっています。</p>
-			<p>
+			<p class="py-0.5">知能情報コースでAIなどの最新技術や実践的なプログラミングを学んでいます。</p>
+			<p class="py-0.5">学友会執行部ではWeb開発に関わりつつ行事の企画・運営に携わっています。</p>
+			<p class="py-0.5">
 				また、プライベートではLinux環境(特にArch
 				Linux)を愛用しており、ターミナル作業の効率化などを楽しんでいます。
 			</p>
@@ -194,13 +194,13 @@
 			{#each skillFilters as filter, i (i)}
 				<button
 					onclick={() => (activeSkillFilter = filter)}
-					class={`px-4 py-1 font-mono font-bold cursor-pointer rounded-full  border transition-all duration-300 ${
+					class={`md:px-4 px-2 md:py-1 font-mono font-bold cursor-pointer rounded-full  border transition-all duration-300 ${
 						activeSkillFilter === filter
 							? 'border-green-500 bg-green-500 text-black dark:text-[#0c0c0c]' // 選択中
 							: 'border-gray-500 text-gray-600 hover:border-green-500 hover:text-green-500 dark:text-gray-400' // 非選択
 					} outline-0`}
 				>
-					<spa class="text-lg"
+					<spa class="md:text-lg"
 						>{filter === 'All'
 							? ''
 							: filter === 'Language'
@@ -218,7 +218,7 @@
 
 		<div class="pt-2 text-lg md:p-2">
 			<div
-				class="gap-8 rounded border-gray-700 p-4 md:grid-cols-4 dark:border-gray-500 grid grid-cols-1 border"
+				class="md:gap-8 gap-3 rounded border-gray-700 p-4 md:grid-cols-4 dark:border-gray-500 grid grid-cols-2 border"
 			>
 				{#each filteredSkills as skill (skill.id)}
 					<SkillCard {skill} />
@@ -230,13 +230,22 @@
 		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Contact Me</h2>
 		<div class="pt-2 text-lg md:p-2">
 			<div class="flex" id="email">
-				<span class="text-xl font-bold px-1">
+				<span class="md:text-xl text-lg font-bold px-1">
 					<span class="pr-2 font-[NerdFont]"></span>
 					Email :
 				</span>
-				<span class="px-2">rg24010r [at] st.omu.ac.jp</span>
+				<span class="md:px-2">rg24010r [at] st.omu.ac.jp</span>
 				<button
-					class="ml-5 bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-xl font-bold px-2 py-0.5 font-mono block w-fit border outline-0 transition-all duration-150"
+					class="md:ml-5 bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-xl font-bold px-2 py-0.5 font-mono md:block hidden w-fit border outline-0 transition-all duration-150"
+					onclick={copyMail}
+				>
+					Copy
+				</button>
+				<span class="md:ml-2 font-bold md:inline hidden">{copyStatus}</span>
+			</div>
+			<div class="md:hidden my-2 flex">
+				<button
+					class="md:ml-5 bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-xl font-bold px-2 py-0.5 font-mono block w-fit border outline-0 transition-all duration-150"
 					onclick={copyMail}
 				>
 					Copy
@@ -246,7 +255,7 @@
 			<div class="text-xl flex" id="accounts">
 				<a
 					href="https://github.com/rirannda"
-					class="px-3 rounded-2xl mx-2 bg-github/10 border-github hover:bg-github/95 py-1 text-lg font-bold md:inline block w-fit border font-[NerdFont] transition-all duration-150"
+					class="px-3 rounded-2xl md:mx-2 bg-github/10 border-github hover:bg-github/95 py-1 text-lg font-bold md:inline block w-fit border font-[NerdFont] transition-all duration-150"
 					target="_blank"
 					rel="external"
 				>
