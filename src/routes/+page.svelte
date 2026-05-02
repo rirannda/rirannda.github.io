@@ -60,10 +60,10 @@
 	function copyMail() {
 		navigator.clipboard.writeText(email).then(
 			() => {
-				copyStatus = ': Copying successful.';
+				copyStatus = ' Copied!';
 			},
 			() => {
-				copyStatus = ': Copy failed.';
+				copyStatus = ' Copy failed.';
 			}
 		);
 	}
@@ -91,7 +91,7 @@
 
 		const quoteInterval = setInterval(() => {
 			cycleQuote();
-		}, 7000);
+		}, 7500);
 
 		const observer = new IntersectionObserver(
 			(entries) => {
