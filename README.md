@@ -11,10 +11,10 @@ EN:[README_EN.md](README_EN.md)
 
 ## Tech Stack
 
-* **Framework:** [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
-* **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-* **Package Manager:** pnpm
-* **Deployment:** GitHub Pages (via GitHub Actions)
+- **Framework:** [SvelteKit](https://kit.svelte.dev/) (Svelte 5)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Package Manager:** pnpm
+- **Deployment:** GitHub Pages (via GitHub Actions)
 
 ## Special Thanks
 
