@@ -3,6 +3,7 @@
 @theme {
 	--color-lighttext: #e4e4e4;
 	--color-darktext: #1e1e1e;
+	--color-undefined: #888888;
 	--color-html: #e44c20;
 	--color-typescript: #3577c4;
 	--color-javascript: #f6df1f;
@@ -30,6 +31,15 @@
 	}
 	.text-darktext {
 		color: var(--color-darktext);
+	}
+	.bg-undefined {
+		background-color: var(--color-undefined);
+	}
+	.text-undefined {
+		color: var(--color-undefined);
+	}
+	.border-undefined {
+		border-color: var(--color-undefined);
 	}
 	.bg-html {
 		background-color: var(--color-html);

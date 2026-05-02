@@ -19,7 +19,10 @@
 <svelte:head>
 	<meta name="description" content="PortfoliOS - O.M.U.C.T. Student, Rirannda's portfolio" />
 	<meta property="og:title" content="Rirannda Portfolio" />
-	<meta property="og:description" content="..." />
+	<meta
+		property="og:description"
+		content="Svelte5製ポートフォリオサイト。ターミナル操作ギミック搭載。"
+	/>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 

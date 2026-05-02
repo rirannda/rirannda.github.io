@@ -102,7 +102,7 @@
 			terminal.pushHistory(input); // Historyに保存
 			const result = await parseCommand(input, currentPath);
 			if (result && 'action' in result && result.action?.type === 'open') {
-				window.open(result.action.url, '_blank');
+				window.open(result.action.url, '_blank', 'noopener,noreferrer');
 			}
 			terminal.pushOutput(
 				currentPrompt,
@@ -144,7 +144,7 @@
 		</div>
 	{:else}
 		<div
-			class="bottom-20 border-t-gray-700 bg-gray-200 px-3 pt-2 font-mono text-sm md:bottom-13 md:px-5 md:text-base dark:text-lighttext fixed z-25 w-full overflow-x-auto border-t transition-all duration-300 dark:bg-[#0c0c0c]"
+			class="bottom-20 border-t-gray-700 bg-gray-200 px-3 pt-2 font-mono text-sm md:bottom-13 md:px-5 md:text-base dark:text-lighttext fixed z-50 w-full overflow-x-auto border-t transition-all duration-300 dark:bg-[#0c0c0c]"
 			class:commandline-enable={terminal.isTerminalEnabled}
 			class:commandline-disable={!terminal.isTerminalEnabled}
 			transition:fly={{ y: 16, duration: 220 }}
@@ -166,7 +166,7 @@
 	{/if}
 	<form
 		onsubmit={handleSubmit}
-		class="right-0 bottom-0 left-0 bg-gray-200 p-2 font-mono dark:text-lighttext pt-8 fixed z-50 transition-all duration-300 dark:bg-[#0c0c0c]"
+		class="right-0 bottom-0 left-0 bg-gray-200 p-2 font-mono dark:text-lighttext pt-8 fixed z-25 transition-all duration-300 dark:bg-[#0c0c0c]"
 		class:commandline-enable={terminal.isTerminalEnabled}
 		class:commandline-disable={!terminal.isTerminalEnabled}
 		transition:fly={{ y: 16, duration: 220 }}

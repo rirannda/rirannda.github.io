@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { os } from '$lib/state/osState.svelte';
+	import { onMount } from 'svelte';
 	// 本物っぽい起動ログの配列
 	const rebootMessages = [
 		'[ OK ] Stopped svelte.service.',
@@ -17,7 +18,7 @@
 	let visibleLines = $state<string[]>([]);
 
 	// コンポーネントが表示された時に、少しずつ文字を出していく
-	$effect(() => {
+	onMount(() => {
 		let currentIndex = 0;
 		let timeoutId: ReturnType<typeof setTimeout> | null = null;
 		const interval = setInterval(() => {
@@ -33,7 +34,7 @@
 				}, 300);
 				currentIndex++;
 				setTimeout(async () => {
-					window.location.href = resolve('/'); // ルートにリダイレクトして再起動を模倣
+					window.location.href = resolve('/'); // 再起動の演出としてリロードしてトップに遷移
 				}, 1500);
 			}
 		}, 150); // 0.15秒ごとに次の行を表示（お好みで調整）

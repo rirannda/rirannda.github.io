@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { os } from '$lib/state/osState.svelte';
+	import { onMount } from 'svelte';
 	// 本物っぽい起動ログの配列
 	const bootMessages = [
 		"  Booting `PortfolioOS Folix'",
@@ -14,7 +15,7 @@
 	let visibleLines = $state<string[]>([]);
 
 	// コンポーネントが表示された時に、少しずつ文字を出していく
-	$effect(() => {
+	onMount(() => {
 		let currentIndex = 0;
 		const interval = setInterval(() => {
 			if (currentIndex < bootMessages.length) {

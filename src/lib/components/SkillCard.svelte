@@ -4,6 +4,7 @@
 	let { skill }: { skill: Skill } = $props();
 
 	type SkillColorKey =
+		| 'undefined'
 		| 'html'
 		| 'typescript'
 		| 'javascript'
@@ -27,6 +28,11 @@
 		SkillColorKey,
 		{ hoverBorder: string; hoverText: string; text: string }
 	> = {
+		undefined: {
+			hoverBorder: 'hover:border-undefined',
+			hoverText: 'group-hover:text-undefined',
+			text: 'text-undefined'
+		},
 		html: {
 			hoverBorder: 'hover:border-html',
 			hoverText: 'group-hover:text-html',
@@ -119,7 +125,9 @@
 		}
 	};
 
-	const skillColors = $derived(colorClasses[skill.color as SkillColorKey] ?? colorClasses.svelte);
+	const skillColors = $derived(
+		colorClasses[skill.color as SkillColorKey] ?? colorClasses.undefined
+	);
 	const currentLevel = $derived(skill.level[langState.current]);
 	const currentDescription = $derived(skill.description[langState.current]);
 	const progressWidth = $derived(

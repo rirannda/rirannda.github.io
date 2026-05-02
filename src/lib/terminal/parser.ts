@@ -51,6 +51,7 @@ export async function parseCommand(input: string, Path: string) {
 		reset: 'reset',
 		whoami: 'whoami',
 		date: 'date',
+		uname: 'uname',
 		reboot: 'reboot',
 		sudo: 'sudo [command]',
 		su: 'su',
@@ -292,7 +293,7 @@ export async function parseCommand(input: string, Path: string) {
 		case 'welcome':
 			return {
 				response: [
-					'Welcome to the portfolio of gorirari!',
+					'Welcome to the portfolio of rirannda!',
 					"Type 'help' to see the list of available commands.",
 					'Feel free to explore and have fun!'
 				]

@@ -16,6 +16,9 @@ class TerminalState {
 
 	pushOutput(path: string, command: string, response: string | string[], isError = false) {
 		this.output.push({ path, command, response, isError });
+		if (this.output.length > 500) {
+			this.output.splice(0, this.output.length - 500);
+		}
 	}
 
 	// history（入力履歴）の追加
