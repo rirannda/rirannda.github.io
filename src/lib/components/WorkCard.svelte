@@ -65,7 +65,7 @@
 			href={work.repoUrl}
 			target="_blank"
 			rel="noopener noreferrer external"
-			class="rounded border-gray-400 px-15 mx-5 py-2 my-4 font-mono hover:bg-gray-100 dark:hover:bg-gray-800 mt-8 inline-block w-3/4 self-center border text-center transition-colors"
+			class="rounded border-gray-400 px-5 md:px-15 mx-5 py-2 my-4 font-mono hover:bg-gray-100 dark:hover:bg-gray-800 mt-8 inline-block w-3/4 self-center border text-center transition-colors"
 		>
 			<span class="text-xl font-[NerdFont]"></span> View on GitHub
 		</a>
