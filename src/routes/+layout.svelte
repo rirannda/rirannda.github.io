@@ -7,12 +7,17 @@
 	import BootingScreen from '$lib/components/BootingScreen.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { os } from '$lib/state/osState.svelte';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	let { children } = $props();
-	onMount(() => {
-		os.setBooting(true);
+	onMount(async () => {
+		// クライアントマウント時に sessionStorage を読む初期化を行う
+		os.init();
 		os.setRebooting(false);
+		await tick();
+
+		// 準備完了！黒い幕（CSS）を取り外す
+		document.documentElement.classList.remove('is-pre-booting');
 	});
 </script>
 

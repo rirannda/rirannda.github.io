@@ -34,6 +34,7 @@
 				}, 300);
 				currentIndex++;
 				setTimeout(async () => {
+					sessionStorage.removeItem('hasBooted');
 					window.location.href = resolve('/'); // 再起動の演出としてリロードしてトップに遷移
 				}, 1500);
 			}
