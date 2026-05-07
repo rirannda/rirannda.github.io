@@ -11,9 +11,11 @@
 
 	onMount(() => {
 		// 画像が複数ある場合のみタイマーを起動
-		if (work.images && work.images.length > 1) {
+		if (work.images && work.images.length > 0) {
 			const interval = setInterval(() => {
-				currentIndex = (currentIndex + 1) % work.images.length;
+				if (work.images) {
+					currentIndex = (currentIndex + 1) % work.images.length;
+				}
 			}, 3000); // 3000ミリ秒（3秒）ごとに切り替え
 
 			return () => clearInterval(interval);
