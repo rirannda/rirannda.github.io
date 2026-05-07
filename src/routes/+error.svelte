@@ -11,7 +11,7 @@
 </svelte:head>
 
 <div
-	class="font-mono text-gray-300 sm:text-base pt-25 md:text-lg px-5 flex h-screen w-full max-w-screen flex-col justify-center bg-[#010082] text-left"
+	class="font-mono text-gray-300 sm:text-base pt-25 md:text-lg px-5 flex h-screen w-full max-w-screen flex-col justify-center bg-[#000030] text-left"
 >
 	<div class="mb-6 gap-6 flex justify-center">
 		<pre class="font-mono leading-5 text-white block text-left">
@@ -26,7 +26,7 @@
         </pre>
 		<div class="pt-2 flex-col text-left">
 			<p class="font-bold text-lg md:text-2xl">PortfoliOS Kernel Panic (Folix)</p>
-			<h3 class="text-5xl md:text-7xl text-white">404</h3>
+			<h3 class="text-5xl md:text-7xl text-white">{status}</h3>
 			<p class="text-2xl md:text-4xl">Not Found</p>
 		</div>
 	</div>
