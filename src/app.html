@@ -1,40 +1,44 @@
 <!doctype html>
 <html lang="ja" translate="no" class="notranslate">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="google" content="notranslate" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		%sveltekit.head%
+		<link
+			rel="preload"
+			href="/fonts/HackNerdFont-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<script>
+			// localStorage に 'dark' が設定されているか、
+			// 設定はないがOS自体がダークモードを要求している場合に 'dark' クラスを付与
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark');
+			} else {
+				document.documentElement.classList.remove('dark');
+			}
+			// sessionStorageに 'hasBooted' がない = これから起動演出をする
+			if (!sessionStorage.getItem('hasBooted')) {
+				// Svelteの準備ができるまで、HTML全体に「起動準備中」のクラスをつける
+				document.documentElement.classList.add('is-pre-booting');
+			}
+		</script>
+		<style>
+			/* 起動準備中クラスがついている間は、中身を隠して背景を真っ黒にする */
+			html.is-pre-booting body {
+				visibility: hidden;
+				background-color: #000;
+			}
+		</style>
+	</head>
 
-<head>
-	<meta charset="utf-8" />
-	<meta name="google" content="notranslate" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	%sveltekit.head%
-	<link rel="preload" href='/fonts/HackNerdFont-Regular.woff2' as="font" type="font/woff2" crossorigin="anonymous" />
-	<script>
-		// localStorage に 'dark' が設定されているか、
-		// 設定はないがOS自体がダークモードを要求している場合に 'dark' クラスを付与
-		if (
-			localStorage.theme === 'dark' ||
-			(!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
-		) {
-			document.documentElement.classList.add('dark');
-		} else {
-			document.documentElement.classList.remove('dark');
-		}
-		// sessionStorageに 'hasBooted' がない = これから起動演出をする
-		if (!sessionStorage.getItem('hasBooted')) {
-			// Svelteの準備ができるまで、HTML全体に「起動準備中」のクラスをつける
-			document.documentElement.classList.add('is-pre-booting');
-		}
-	</script>
-	<style>
-		/* 起動準備中クラスがついている間は、中身を隠して背景を真っ黒にする */
-		html.is-pre-booting body {
-			visibility: hidden;
-			background-color: #000;
-		}
-	</style>
-</head>
-
-<body data-sveltekit-preload-data="hover">
-	<div style="display: contents">%sveltekit.body%</div>
-</body>
-
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
 </html>
