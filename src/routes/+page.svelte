@@ -122,10 +122,15 @@
 	});
 </script>
 
+<svelte:head>
+	<title>PortfoliOS | Rirannda's Portfolio</title>
+	<meta property="og:url" content="https://rirannda.github.io/" />
+</svelte:head>
+
 <div
 	class="gap-10 md:px-10 px-5 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
 >
-	<section id="top" class="mb-55 scroll-mt-31 pt-40 md:mb-100 md:pt-35">
+	<section id="top" class="mb-55 scroll-mt-31 pt-40 md:mb-120 md:pt-35">
 		<p class="font-mono text-xl text-green-600 dark:text-green-400">Hi, I'm</p>
 		<h1 class="text-6xl font-bold md:my-3 md:text-9xl">Rirannda</h1>
 		<p class="my-3 text-4xl">O.M.U.C.T. Student.</p>

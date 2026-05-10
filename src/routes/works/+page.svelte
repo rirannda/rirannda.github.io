@@ -55,6 +55,11 @@
 	});
 </script>
 
+<svelte:head>
+	<title>PortfoliOS - Works | Rirannda's Portfolio</title>
+	<meta property="og:url" content="https://rirannda.github.io/works" />
+</svelte:head>
+
 <div
 	class="gap-10 px-10 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
 >

@@ -16,18 +16,16 @@
 		os.setRebooting(false);
 		await tick();
 
-		// 準備完了！黒い幕（CSS）を取り外す
 		document.documentElement.classList.remove('is-pre-booting');
 	});
 </script>
 
 <svelte:head>
-	<meta name="description" content="PortfoliOS - O.M.U.C.T. Student, Rirannda's portfolio" />
-	<meta property="og:title" content="Rirannda Portfolio" />
-	<meta
-		property="og:description"
-		content="Svelte5製ポートフォリオサイト。ターミナル操作ギミック搭載。"
-	/>
+	<meta name="description" content="PortfoliOS | O.M.U.C.T. Student, Rirannda's portfolio" />
+	<meta property="og:title" content="PortfoliOS | Rirannda's Portfolio" />
+	<meta property="og:description" content="PortfoliOS | O.M.U.C.T. Student, Rirannda's portfolio" />
+	<meta property="og:image" content="/images/thumbnail.png" />
+	<meta name="twitter:card" content="summary" />
 	<link rel="icon" href={favicon} />
 </svelte:head>
 

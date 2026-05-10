@@ -26,12 +26,6 @@
 }
 
 @layer utilities {
-	.text-lighttext {
-		color: var(--color-lighttext);
-	}
-	.text-darktext {
-		color: var(--color-darktext);
-	}
 	.bg-undefined {
 		background-color: var(--color-undefined);
 	}
@@ -235,7 +229,7 @@
 
 @font-face {
 	font-family: 'NerdFont';
-	src: url('./fonts/HackNerdFont-Regular.woff2') format('woff2');
+	src: url('/fonts/HackNerdFont-Regular.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 	font-display: swap;

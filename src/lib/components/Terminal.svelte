@@ -178,6 +178,7 @@
 				<input
 					type="text"
 					bind:value={inputValue}
+					aria-label="Terminal Command input"
 					onkeydown={handleKeydown}
 					class="min-w-0 pl-2 text-sm md:pl-3 md:text-base w-full flex-1 outline-0"
 				/>
@@ -192,12 +193,14 @@
 				/>
 				<button
 					type="button"
+					aria-label="Expand Command History"
 					onclick={toggleExpand}
 					class="rounded border-gray-400 px-2 py-1 text-lg font-bold md:border-0 md:px-3 border text-center font-[NerdFont] outline-0"
 					>󰄿</button
 				>
 				<button
 					type="button"
+					aria-label="Close Terminal"
 					onclick={toggleTerminal}
 					class="border-gray-400 px-2 py-1 text-base md:right-0 md:border-t-0 md:border-r-0 md:border-b-0 md:border-l md:border-l-gray-400 md:pl-4 border text-center font-[NerdFont] outline-0"
 					></button
@@ -207,6 +210,7 @@
 	</form>
 	<button
 		type="button"
+		aria-label="Open Terminal"
 		onclick={toggleTerminal}
 		class={`${terminal.isTerminalEnabled ? 'hidden' : ''} right-0 bottom-0 h-14 w-14 rounded-2xl border-gray-500 bg-gray-200 p-2.5 pl-1 text-3xl  md:h-17 md:w-17 md:p-3.5 dark:text-lighttext  absolute z-100 border-2 font-[NerdFont] transition-all dark:bg-[#0c0c0c]`}
 		></button
