@@ -16,7 +16,8 @@
 	const quotes = [
 		'Stay Hungry, Stay Foolish - Steve Jobs',
 		'Keep It Simple Stupid - Kelly Johnson',
-		'Talk is cheap. Show me the code. - Linus Torvalds'
+		'Talk is cheap. Show me the code. - Linus Torvalds',
+		'Tap the button in the bottom right to try the terminal!'
 	];
 
 	let currentQuote = $state(quotes[0]);
