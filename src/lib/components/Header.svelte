@@ -81,7 +81,7 @@
 		></span>
 	</a>
 
-	<nav class="mx-5 gap-6 md:flex ml-auto hidden items-center" aria-label="Global navigation">
+	<nav class="mr-5 pl-5 gap-6 md:flex ml-auto hidden items-center" aria-label="Global navigation">
 		{#each links as link (link.id)}
 			<a
 				href={resolve(`/#${link.id}`)}
