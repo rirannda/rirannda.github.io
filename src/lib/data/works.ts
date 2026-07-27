@@ -31,16 +31,12 @@ export const worksData: Work[] = [
 	{
 		id: 'typ-hl',
 		name: 'typ-hl',
-		images: [
-			'/images/typ-hl/screenshot_1.png'
-		],
+		images: ['/images/typ-hl/screenshot_1.png'],
 		description: {
 			ja: 'Typstのコードブロックを拡張するライブラリ',
 			en: 'A typst library for extending code blocks'
 		},
-		tech: [
-			{ bg: 'typst', textColor: 'lighttext', label: ' Typst' }
-		],
+		tech: [{ bg: 'typst', textColor: 'lighttext', label: ' Typst' }],
 		repoUrl: 'https://github.com/rirannda/typ-hl',
 		isFeatured: true
 	},
