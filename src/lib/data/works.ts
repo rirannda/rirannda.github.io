@@ -29,20 +29,19 @@ export const worksData: Work[] = [
 		isFeatured: true
 	},
 	{
-		id: 'app-a',
-		name: 'Awesome App A',
+		id: 'typ-hl',
+		name: 'typ-hl',
 		images: [
-			/*'/images/app-a.png'*/
+			'/images/typ-hl/screenshot_1.png'
 		],
 		description: {
-			ja: 'Reactで作ったすごいアプリ。',
-			en: 'An amazing app created with React.'
+			ja: 'Typstのコードブロックを拡張するライブラリ',
+			en: 'A typst library for extending code blocks'
 		},
 		tech: [
-			{ bg: 'react', textColor: 'lighttext', label: ' React' },
-			{ bg: 'typescript', textColor: 'lighttext', label: ' TypeScript' }
+			{ bg: 'typst', textColor: 'lighttext', label: ' Typst' }
 		],
-		repoUrl: 'https://github.com/rirannda/app-a',
+		repoUrl: 'https://github.com/rirannda/typ-hl',
 		isFeatured: true
 	},
 	{
