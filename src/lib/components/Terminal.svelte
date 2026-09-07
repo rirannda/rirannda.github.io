@@ -127,7 +127,7 @@
 <div id="terminalWrapper" class="right-0 bottom-0 sticky z-100">
 	{#if terminal.isHistoryOpened}
 		<div
-			class={`${!terminal.isTerminalEnabled ? 'hidden' : ''} top-16 right-0 bottom-16 left-0 mt-1 bg-gray-200/90 p-3 font-mono text-sm text-black md:top-18 md:bottom-10 md:p-5 md:text-base dark:text-lighttext fixed z-50 overflow-x-auto overflow-y-auto transition-colors duration-300 dark:bg-[#0c0c0c]/90`}
+			class={`${!terminal.isTerminalEnabled ? 'hidden' : ''} top-16 right-0 bottom-16 left-0 mt-1 bg-gray-200/90 p-3 font-mono text-sm text-black md:top-18 md:bottom-10 md:p-5 md:text-base dark:text-lighttext fixed z-60 overflow-x-auto overflow-y-auto transition-colors duration-300 dark:bg-[#0c0c0c]/90`}
 		>
 			{#each terminal.output as line, i (i)}
 				<div class="mb-2">
