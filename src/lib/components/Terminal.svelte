@@ -127,7 +127,7 @@
 <div id="terminalWrapper" class="right-0 bottom-0 sticky z-100">
 	{#if terminal.isHistoryOpened}
 		<div
-			class={`${!terminal.isTerminalEnabled ? 'hidden' : ''} top-16 right-0 bottom-16 left-0 mt-1 bg-gray-200/90 p-3 font-mono text-sm text-black md:top-18 md:bottom-10 md:p-5 md:text-base dark:text-lighttext fixed z-60 overflow-x-auto overflow-y-auto transition-colors duration-300 dark:bg-[#0c0c0c]/90`}
+			class={`${terminal.isTerminalEnabled ? '' : 'hidden'} top-16 right-0 bottom-18 left-0 mt-1 bg-gray-200/90 p-3 font-mono text-sm text-black md:top-20 md:bottom-10 md:p-5 md:text-base dark:text-lighttext fixed z-60 overflow-x-auto overflow-y-auto transition-colors duration-300 dark:bg-[#0c0c0c]/90`}
 		>
 			{#each terminal.output as line, i (i)}
 				<div class="mb-2">
@@ -188,21 +188,21 @@
 			>
 				<input
 					type="submit"
-					class="rounded border-gray-400 px-2 py-1 text-sm font-bold md:border-0 md:px-3 border outline-0"
+					class="rounded border-gray-400 px-2 py-1 text-sm font-bold md:border-0 md:px-3 cursor-pointer border outline-0"
 					value="Run"
 				/>
 				<button
 					type="button"
 					aria-label="Expand Command History"
 					onclick={toggleExpand}
-					class="rounded border-gray-400 px-2 py-1 text-lg font-bold md:border-0 md:px-3 border text-center font-[NerdFont] outline-0"
+					class="rounded border-gray-400 px-2 py-1 text-lg font-bold md:border-0 md:px-3 font-hack cursor-pointer border text-center outline-0"
 					>󰄿</button
 				>
 				<button
 					type="button"
 					aria-label="Close Terminal"
 					onclick={toggleTerminal}
-					class="border-gray-400 px-2 py-1 text-base md:right-0 md:border-t-0 md:border-r-0 md:border-b-0 md:border-l md:border-l-gray-400 md:pl-4 border text-center font-[NerdFont] outline-0"
+					class="border-gray-400 px-2 py-1 text-base md:right-0 md:border-t-0 md:border-r-0 md:border-b-0 md:border-l md:border-l-gray-400 md:pl-4 font-hack cursor-pointer border text-center outline-0"
 					></button
 				>
 			</div>
@@ -212,7 +212,7 @@
 		type="button"
 		aria-label="Open Terminal"
 		onclick={toggleTerminal}
-		class={`${terminal.isTerminalEnabled ? 'hidden' : ''} right-0 bottom-0 h-14 w-14 rounded-2xl border-gray-500 bg-gray-200 p-2.5 pl-1 text-3xl  md:h-17 md:w-17 md:p-3.5 dark:text-lighttext  absolute z-100 border-2 font-[NerdFont] transition-all dark:bg-[#0c0c0c]`}
+		class={`${terminal.isTerminalEnabled ? 'hidden' : ''} right-0 bottom-0 h-14 w-14 rounded-2xl border-gray-500 bg-gray-200 p-2.5 pl-1 text-3xl  md:h-17 md:w-17 md:p-3.5 md:pr-6 dark:text-lighttext font-hack absolute z-100 cursor-pointer border-2 text-center transition-all dark:bg-[#0c0c0c]`}
 		></button
 	>
 </div>

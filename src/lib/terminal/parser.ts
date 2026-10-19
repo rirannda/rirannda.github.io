@@ -27,7 +27,8 @@ export const availableCommands = [
 	'fakefetch',
 	'welcome',
 	'open',
-	'thanks'
+	'thanks',
+	'exit'
 ];
 
 export const availableDirs = ['top', 'about', 'featured', 'skills', 'contact', 'works'];
@@ -59,7 +60,8 @@ export async function parseCommand(input: string, Path: string) {
 		fakefetch: 'fakefetch',
 		welcome: 'welcome',
 		open: 'open [target]',
-		thanks: 'thanks'
+		thanks: 'thanks',
+		exit: 'exit'
 	};
 	const noArgumentsCommands = new Set([
 		'reset',
@@ -69,7 +71,8 @@ export async function parseCommand(input: string, Path: string) {
 		'reboot',
 		'fakefetch',
 		'welcome',
-		'thanks'
+		'thanks',
+		'exit'
 	]);
 
 	for (let i = 1; i < tokens.length; i++) {
@@ -106,7 +109,7 @@ export async function parseCommand(input: string, Path: string) {
 			if (args.length === 1 && args[0] === '') {
 				return {
 					response:
-						'Available commands: help, cd, date, echo, fakefetch, ls, pwd, reboot, reset, uname, welcome, whoami, open, thanks'
+						'Available commands: help, cd, date, echo, fakefetch, ls, pwd, reboot, reset, uname, welcome, whoami, open, thanks, exit'
 				};
 			}
 
@@ -328,6 +331,11 @@ export async function parseCommand(input: string, Path: string) {
 				response: [
 					'Inspired by the amazing dev community. Thank you to all creators who share their code and ideas!'
 				]
+			};
+		case 'exit':
+			terminal.isTerminalEnabled = false;
+			return {
+				response: ''
 			};
 		default:
 			return { response: `Command not found: ${command}`, isError: true };
