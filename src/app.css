@@ -23,7 +23,7 @@
 	--color-github: #8250df;
 	--color-docker: #2560ff;
 	--color-tailwind: #01bbff;
-	--font-hack: "Hack Nerd Font Mono", monospace;
+	--font-hack: 'Hack Nerd Font Mono', monospace;
 }
 
 @layer utilities {

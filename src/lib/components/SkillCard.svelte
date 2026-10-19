@@ -200,7 +200,7 @@
 >
 	<button
 		type="button"
-		class="right-4 top-4 text-2xl text-gray-500 hover:text-black dark:hover:text-white absolute cursor-pointer font-hack outline-0 transition-colors"
+		class="right-4 top-4 text-2xl text-gray-500 hover:text-black dark:hover:text-white font-hack absolute cursor-pointer outline-0 transition-colors"
 		onclick={closeModal}
 		aria-label="Close modal"
 	>

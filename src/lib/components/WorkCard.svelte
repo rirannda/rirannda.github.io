@@ -57,7 +57,7 @@
 		<div class="px-2">
 			{#each work.tech as tech, i (i)}
 				<span
-					class={`bg-${tech.bg} mx-1 md:px-2 px-2 my-1 md:py-1 inline-block w-fit font-hack dark:text-${tech.textColor} text-${tech.textColor} rounded-full`}
+					class={`bg-${tech.bg} mx-1 md:px-2 px-2 my-1 md:py-1 font-hack inline-block w-fit dark:text-${tech.textColor} text-${tech.textColor} rounded-full`}
 				>
 					{tech.label}
 				</span>

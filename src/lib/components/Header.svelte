@@ -109,7 +109,7 @@
 	</button>
 
 	<button
-		class="ml-2 h-6 w-7 md:ml-10 md:h-9 md:w-11 relative shrink-0 outline-0 cursor-pointer"
+		class="ml-2 h-6 w-7 md:ml-10 md:h-9 md:w-11 relative shrink-0 cursor-pointer outline-0"
 		aria-label="Toggle menu"
 		aria-expanded={isMenuOpen}
 		aria-controls="mobile-menu"
