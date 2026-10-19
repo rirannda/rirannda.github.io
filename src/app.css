@@ -23,6 +23,7 @@
 	--color-github: #8250df;
 	--color-docker: #2560ff;
 	--color-tailwind: #01bbff;
+	--font-hack: "Hack Nerd Font Mono", monospace;
 }
 
 @layer utilities {
@@ -228,7 +229,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @font-face {
-	font-family: 'NerdFont';
+	font-family: 'Hack Nerd Font Mono';
 	src: url('/fonts/HackNerdFont-Regular.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;

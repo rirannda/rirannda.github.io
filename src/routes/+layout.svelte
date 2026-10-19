@@ -29,17 +29,17 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
+<div class="flex min-h-screen flex-col" inert={os.isBooting || os.isRebooting}>
+	<Header />
+	<main>
+		{@render children()}
+		<Footer />
+	</main>
+	<Terminal />
+</div>
+
 {#if os.isBooting}
 	<BootingScreen />
 {:else if os.isRebooting}
 	<RebootScreen />
-{:else}
-	<div class="flex min-h-screen flex-col">
-		<Header />
-		<main>
-			{@render children()}
-			<Footer />
-		</main>
-		<Terminal />
-	</div>
 {/if}

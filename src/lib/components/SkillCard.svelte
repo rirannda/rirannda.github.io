@@ -175,7 +175,7 @@
 >
 	<div class="mb-4 gap-1 md:gap-4 flex items-center">
 		<span
-			class={`pr-2 text-2xl md:pr-0 md:text-4xl font-[NerdFont] transition-colors ${skillColors.hoverText}`}
+			class={`pr-2 text-2xl md:pr-0 md:text-4xl font-hack transition-colors ${skillColors.hoverText}`}
 			>{skill.logo}</span
 		>
 		<h3 class={`font-mono text-lg font-bold md:text-xl transition-colors ${skillColors.hoverText}`}>
@@ -200,7 +200,7 @@
 >
 	<button
 		type="button"
-		class="right-4 top-4 text-2xl text-gray-500 hover:text-black dark:hover:text-white absolute cursor-pointer font-[NerdFont] outline-0 transition-colors"
+		class="right-4 top-4 text-2xl text-gray-500 hover:text-black dark:hover:text-white absolute cursor-pointer font-hack outline-0 transition-colors"
 		onclick={closeModal}
 		aria-label="Close modal"
 	>
@@ -208,7 +208,7 @@
 	</button>
 
 	<div class="mb-6 gap-4 flex items-center">
-		<span class={`text-6xl font-[NerdFont] ${skillColors.text}`}>{skill.logo}</span>
+		<span class={`text-6xl font-hack ${skillColors.text}`}>{skill.logo}</span>
 		<div class="pl-2">
 			<h3 id="skill-modal-title" class="mb-1 text-2xl font-bold">
 				{skill.name}

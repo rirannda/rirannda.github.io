@@ -57,7 +57,7 @@
 		<div class="px-2">
 			{#each work.tech as tech, i (i)}
 				<span
-					class={`bg-${tech.bg} mx-1 md:px-2 px-2 my-1 md:py-1 inline-block w-fit font-[NerdFont] dark:text-${tech.textColor} text-${tech.textColor} rounded-full`}
+					class={`bg-${tech.bg} mx-1 md:px-2 px-2 my-1 md:py-1 inline-block w-fit font-hack dark:text-${tech.textColor} text-${tech.textColor} rounded-full`}
 				>
 					{tech.label}
 				</span>
@@ -69,7 +69,7 @@
 			rel="noopener noreferrer external"
 			class="rounded border-gray-400 px-5 md:px-15 mx-5 py-2 my-4 font-mono hover:bg-gray-100 dark:hover:bg-gray-800 mt-8 inline-block w-3/4 self-center border text-center transition-colors"
 		>
-			<span class="text-xl font-[NerdFont]"></span> View on GitHub
+			<span class="text-xl font-hack"></span> View on GitHub
 		</a>
 	</div>
 </div>

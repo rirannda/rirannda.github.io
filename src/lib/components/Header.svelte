@@ -94,22 +94,22 @@
 	<button
 		type="button"
 		onclick={toggleTheme}
-		class="border-archlinux rounded-xl py-1 pr-2.5 pl-1.5 md:inline md:py-2 md:pr-4.5 md:pl-3.5 md:ml-10 hidden border text-center font-[NerdFont] whitespace-pre outline-0"
+		class="border-archlinux rounded-xl py-1 pr-2.5 pl-1.5 md:inline md:py-2 md:pr-4.5 md:pl-3.5 md:ml-10 font-hack hidden cursor-pointer border text-center whitespace-pre outline-0"
 	>
 		{theme.isDark ? '  Light' : '  Dark'}
 	</button>
 
 	<button
 		onclick={toggleLang}
-		class="border-archlinux rounded-xl py-1 pr-2.5 pl-1.5 md:inline md:py-1.5 md:px-3 md:ml-3 font-bold hidden border text-center whitespace-pre outline-0"
+		class="border-archlinux rounded-xl py-1 pr-2.5 pl-1.5 md:inline md:py-1.5 md:px-3 md:ml-3 font-bold hidden cursor-pointer border text-center whitespace-pre outline-0"
 	>
-		<span class="pr-3 text-lg font-normal font-[NerdFont]"></span>{langState.current === 'ja'
+		<span class="pr-3 text-lg font-normal font-hack"></span>{langState.current === 'ja'
 			? 'EN'
 			: 'JP'}
 	</button>
 
 	<button
-		class="ml-2 h-6 w-7 md:ml-10 md:h-9 md:w-11 relative shrink-0 outline-0"
+		class="ml-2 h-6 w-7 md:ml-10 md:h-9 md:w-11 relative shrink-0 outline-0 cursor-pointer"
 		aria-label="Toggle menu"
 		aria-expanded={isMenuOpen}
 		aria-controls="mobile-menu"
@@ -150,7 +150,7 @@
 				<button
 					type="button"
 					onclick={toggleTheme}
-					class="border-archlinux mt-1 rounded-xl py-1 pr-2.5 pl-1.5 border text-center font-[NerdFont] whitespace-pre outline-0"
+					class="border-archlinux mt-1 rounded-xl py-1 pr-2.5 pl-1.5 font-hack border text-center whitespace-pre outline-0"
 				>
 					{theme.isDark ? '  Light' : '  Dark'}
 				</button>
@@ -159,9 +159,9 @@
 				<button
 					type="button"
 					onclick={toggleLang}
-					class="border-archlinux mt-1 rounded-xl py-1 pr-2.5 pl-1.5 border text-center font-[NerdFont] whitespace-pre outline-0"
+					class="border-archlinux mt-1 rounded-xl py-1 pr-2.5 pl-1.5 font-hack border text-center whitespace-pre outline-0"
 				>
-					<span class="pr-3 text-lg font-normal font-[NerdFont]"></span>{langState.current === 'ja'
+					<span class="pr-3 text-lg font-normal font-hack"></span>{langState.current === 'ja'
 						? 'EN'
 						: 'JP'}
 				</button>

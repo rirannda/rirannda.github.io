@@ -131,7 +131,7 @@
 <div
 	class="gap-10 md:px-10 px-5 pt-30 md:max-w-3/5 mx-auto max-w-screen flex-col justify-center text-left align-baseline"
 >
-	<section id="top" class="mb-55 scroll-mt-31 pt-40 md:mb-120 md:pt-35">
+	<section id="top" class="mb-55 scroll-mt-31 pt-25 md:mb-120 md:pt-30">
 		<p class="font-mono text-xl text-green-600 dark:text-green-400">Hi, I'm</p>
 		<h1 class="text-6xl font-bold md:my-3 md:text-9xl">Rirannda</h1>
 		<p class="my-3 text-4xl">O.M.U.C.T. Student.</p>
@@ -145,33 +145,33 @@
 		{/if}
 		<div class="pt-5">
 			<a
-				class="mb-4 rounded-2xl border-amber-600 bg-amber-600/10 px-5 py-4 text-lg font-bold hover:bg-amber-600/85 md:mr-3 md:inline block w-fit border font-[NerdFont] transition-all duration-150"
+				class="mb-4 rounded-2xl border-amber-600 bg-amber-600/10 px-5 py-4 text-lg font-bold hover:bg-amber-600/85 md:mr-3 md:inline font-hack block w-fit border transition-all duration-150"
 				href="#featured"
 			>
 				View projects 
 			</a>
 			<a
-				class="bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-2xl px-5 py-4 text-lg font-bold md:inline block w-fit border font-[NerdFont] transition-all duration-150"
+				class="bg-archlinux/10 border-archlinux hover:bg-archlinux/95 rounded-2xl px-5 py-4 text-lg font-bold md:inline font-hack block w-fit border transition-all duration-150"
 				href="#contact"
 			>
 				Contact me
 			</a>
 		</div>
 	</section>
-	<section id="about" class="scroll-mt-31 pb-5">
+	<section id="about" class="scroll-mt-26 pb-5">
 		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">About Me</h2>
 		<div class="md:px-6 flex">
 			<span class="w-1 bg-green-500 text-green-500 h-auto rounded-full">|</span>
 			<div class="px-2 py-1 md:ml-1 flex-col">
 				<p class="text-xl inline w-fit">
-					<span class="text-sm pr-[0.5em] font-[NerdFont]"></span>
+					<span class="text-sm font-hack pr-[0.5em]"></span>
 					{t.about.school}
 					<span class="md:hidden block"></span>
 					<span class="md:inline hidden">:</span>
 					{t.about.courseGrade}
 				</p>
 				<p class="text-xl py-2 w-fit">
-					<span class="text-sm pr-[0.5em] font-[NerdFont]"></span>
+					<span class="text-sm font-hack pr-[0.5em]"></span>
 					{t.about.osakaSa}
 				</p>
 			</div>
@@ -185,7 +185,7 @@
 			</p>
 		</div>
 	</section>
-	<section id="featured" class="mb-5 scroll-mt-21 pb-10">
+	<section id="featured" class="mb-5 scroll-mt-26 pb-10">
 		<h2 class="mb-4 border-green-500 pb-1.5 text-4xl font-bold md:text-5xl border-b">
 			Featured-Projects
 		</h2>
@@ -201,7 +201,7 @@
 			>{t.featuredPj.viewAll}</a
 		>
 	</section>
-	<section id="skills" class="scroll-mt-21 pb-5">
+	<section id="skills" class="scroll-mt-26 pb-5">
 		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Skills</h2>
 		<p class="text-lg">{t.skills.desc}</p>
 		<p class="ml-2 font-mono text-gray-700 dark:text-gray-300 italic">
@@ -217,7 +217,7 @@
 							: 'border-gray-500 text-gray-600 hover:border-green-500 hover:text-green-500 dark:text-gray-400' // 非選択
 					} outline-0`}
 				>
-					<span class="md:text-lg font-[NerdFont]"
+					<span class="md:text-lg font-hack"
 						>{filter === 'All'
 							? ''
 							: filter === 'Language'
@@ -241,12 +241,12 @@
 			</div>
 		</div>
 	</section>
-	<section id="contact" class="scroll-mt-21 pb-5">
+	<section id="contact" class="scroll-mt-26 pb-5">
 		<h2 class="mb-4 border-green-500 text-4xl font-bold md:text-5xl border-b">Contact Me</h2>
 		<div class="pt-2 text-lg md:p-2">
 			<div class="flex" id="email">
 				<span class="md:text-xl text-lg font-bold px-1">
-					<span class="pr-2 font-[NerdFont]"></span>
+					<span class="pr-2 font-hack"></span>
 					Email :
 				</span>
 				<span class="md:px-2">rg24010r [at] st.omu.ac.jp</span>
@@ -270,11 +270,11 @@
 			<div class="text-xl flex" id="accounts">
 				<a
 					href="https://github.com/rirannda"
-					class="px-3 rounded-2xl md:mx-2 bg-github/10 border-github hover:bg-github/95 py-1 text-lg font-bold md:inline block w-fit border font-[NerdFont] transition-all duration-150"
+					class="px-3 rounded-2xl md:mx-2 bg-github/10 border-github hover:bg-github/95 py-1 text-lg font-bold md:inline font-hack block w-fit border transition-all duration-150"
 					target="_blank"
 					rel="external noopener noreferrer"
 				>
-					<span class="pr-1 text-2xl font-[NerdFont]"></span>
+					<span class="pr-1 text-2xl font-hack"></span>
 					rirannda
 				</a>
 			</div>
