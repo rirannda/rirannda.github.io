@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { os } from '$lib/state/osState.svelte';
 	import { onMount } from 'svelte';
-	// 本物っぽい起動ログの配列
+	import { fade } from 'svelte/transition';
+
 	const bootMessages = [
 		"  Booting `PortfolioOS Folix'",
+		' ',
+		'Tips: You can skip this messages with click or tap.',
 		' ',
 		'Loading Kernel Folix ...',
 		'Loading Framework Svelte5 ...',
@@ -13,36 +16,58 @@
 	];
 
 	let visibleLines = $state<string[]>([]);
+	let intervalId: ReturnType<typeof setInterval> | undefined;
+	let welcomeTimeoutId: ReturnType<typeof setTimeout> | undefined;
+	let finishTimeoutId: ReturnType<typeof setTimeout> | undefined;
+	let hasFinished = false;
+
+	function clearTimers() {
+		clearInterval(intervalId);
+		clearTimeout(welcomeTimeoutId);
+		clearTimeout(finishTimeoutId);
+	}
+
+	function finishBoot() {
+		if (hasFinished) return;
+		hasFinished = true;
+		clearTimers();
+		os.setBooting(false);
+	}
 
 	// コンポーネントが表示された時に、少しずつ文字を出していく
 	onMount(() => {
 		let currentIndex = 0;
-		const interval = setInterval(() => {
+		intervalId = setInterval(() => {
 			if (currentIndex < bootMessages.length) {
 				visibleLines.push(bootMessages[currentIndex]);
 				currentIndex++;
 			} else {
-				clearInterval(interval);
-				// 全てのメッセージが出終わったら、少し待ってからメイン画面へ
+				clearInterval(intervalId);
 				visibleLines.push('Loading ...');
 				visibleLines.push(' ');
 
-				setTimeout(() => {
+				welcomeTimeoutId = setTimeout(() => {
 					visibleLines.push('Welcome to my portfolio!');
+					visibleLines.push(' ');
+					visibleLines.push('wait 5s or click to turn in...');
+					// 最後のメッセージを表示してから5秒後にメイン画面へ
+					finishTimeoutId = setTimeout(finishBoot, 5000);
 				}, 600);
-
-				setTimeout(() => {
-					os.setBooting(false);
-				}, 2000);
 			}
-		}, 200);
+		}, 350);
 
-		return () => clearInterval(interval);
+		return clearTimers;
 	});
 </script>
 
-<div class="inset-0 bg-black p-6 font-mono text-white fixed z-9999 flex flex-col whitespace-pre">
+<button
+	type="button"
+	aria-label="Skip boot sequence"
+	onclick={finishBoot}
+	out:fade|global={{ duration: 400 }}
+	class="inset-0 bg-black p-6 font-mono text-white focus-visible:outline-white fixed z-9999 flex cursor-pointer flex-col text-left whitespace-pre focus-visible:outline-2 focus-visible:-outline-offset-4"
+>
 	{#each visibleLines as line, i (i)}
-		<div>{line}</div>
+		<span>{line}</span>
 	{/each}
-</div>
+</button>

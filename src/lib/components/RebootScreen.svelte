@@ -2,7 +2,8 @@
 	import { resolve } from '$app/paths';
 	import { os } from '$lib/state/osState.svelte';
 	import { onMount } from 'svelte';
-	// 本物っぽい起動ログの配列
+	import { fade } from 'svelte/transition';
+
 	const rebootMessages = [
 		'[ OK ] Stopped svelte.service.',
 		'[ OK ] Stopped typescript.service.',
@@ -12,45 +13,63 @@
 		'[ OK ] Reached target Shutdown.',
 		'[ OK ] Started Reboot.',
 		' ',
-		'Rebooting PortfolioOS v0.0.0 ...'
+		'Rebooting PortfolioOS v1.0.0 ...'
 	];
 
 	let visibleLines = $state<string[]>([]);
+	let intervalId: ReturnType<typeof setInterval> | undefined;
+	let messageTimeoutId: ReturnType<typeof setTimeout> | undefined;
+	let rebootTimeoutId: ReturnType<typeof setTimeout> | undefined;
+	let hasFinished = false;
+
+	function clearTimers() {
+		clearInterval(intervalId);
+		clearTimeout(messageTimeoutId);
+		clearTimeout(rebootTimeoutId);
+	}
+
+	function finishReboot() {
+		if (hasFinished) return;
+		hasFinished = true;
+		clearTimers();
+		sessionStorage.removeItem('hasBooted');
+		window.location.href = resolve('/');
+	}
 
 	// コンポーネントが表示された時に、少しずつ文字を出していく
 	onMount(() => {
 		let currentIndex = 0;
-		let timeoutId: ReturnType<typeof setTimeout> | null = null;
-		const interval = setInterval(() => {
+		intervalId = setInterval(() => {
 			if (currentIndex < rebootMessages.length - 1) {
 				visibleLines.push(rebootMessages[currentIndex]);
 				currentIndex++;
 			} else if (currentIndex === rebootMessages.length - 1) {
 				// 最後のメッセージだけ0.3秒待ってから表示
-				clearInterval(interval);
-				timeoutId = setTimeout(() => {
+				clearInterval(intervalId);
+				messageTimeoutId = setTimeout(() => {
 					visibleLines.push(rebootMessages[rebootMessages.length - 1]);
-					visibleLines = visibleLines;
 				}, 300);
 				currentIndex++;
-				setTimeout(async () => {
-					sessionStorage.removeItem('hasBooted');
-					window.location.href = resolve('/'); // 再起動の演出としてリロードしてトップに遷移
-				}, 1500);
+				rebootTimeoutId = setTimeout(finishReboot, 1500);
 			}
-		}, 150); // 0.15秒ごとに次の行を表示（お好みで調整）
+		}, 250);
 
 		return () => {
-			clearInterval(interval);
-			if (timeoutId) clearTimeout(timeoutId);
+			clearTimers();
 			os.setRebooting(false);
 		};
 	});
 </script>
 
-<div class="inset-0 bg-black p-6 font-mono text-white fixed z-9999 flex flex-col">
+<button
+	type="button"
+	aria-label="Skip reboot sequence"
+	onclick={finishReboot}
+	in:fade|global={{ duration: 400 }}
+	class="inset-0 bg-black p-6 font-mono text-white focus-visible:outline-white fixed z-9999 flex cursor-pointer flex-col text-left focus-visible:outline-2 focus-visible:-outline-offset-4"
+>
 	{#each visibleLines as line, i (i)}
-		<div class="whitespace-pre">{line}</div>
+		<span class="whitespace-pre">{line}</span>
 	{/each}
-	<div class="mt-2 h-4 w-2 bg-white"></div>
-</div>
+	<span class="mt-2 h-4 w-2 bg-white"></span>
+</button>
