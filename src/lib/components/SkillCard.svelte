@@ -129,11 +129,6 @@
 			hoverBorder: 'hover:border-arduino',
 			hoverText: 'group-hover:text-arduino',
 			text: 'text-arduino'
-		},
-		scratch: {
-			hoverBorder: 'hover:border-scratch',
-			hoverText: 'group-hover:text-scratch',
-			text: 'text-scratch'
 		}
 	};
 
