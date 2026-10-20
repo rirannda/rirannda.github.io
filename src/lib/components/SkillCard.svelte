@@ -23,7 +23,8 @@
 		| 'typst'
 		| 'github'
 		| 'docker'
-		| 'tailwind';
+		| 'tailwind'
+		| 'arduino';
 
 	const colorClasses: Record<
 		SkillColorKey,
@@ -123,6 +124,16 @@
 			hoverBorder: 'hover:border-tailwind',
 			hoverText: 'group-hover:text-tailwind',
 			text: 'text-tailwind'
+		},
+		arduino: {
+			hoverBorder: 'hover:border-arduino',
+			hoverText: 'group-hover:text-arduino',
+			text: 'text-arduino'
+		},
+		scratch: {
+			hoverBorder: 'hover:border-scratch',
+			hoverText: 'group-hover:text-scratch',
+			text: 'text-scratch'
 		}
 	};
 

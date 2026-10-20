@@ -17,7 +17,7 @@ export const worksData: Work[] = [
 		name: 'PortfoliOS',
 		images: ['/images/PortfoliOS/screenshot_1.png'],
 		description: {
-			ja: '本ポートフォリオサイト。Svelte5で実装。コマンドラインから実際にサイト内を操作できるギミックを搭載しました。',
+			ja: '本ポートフォリオサイト。Svelte5で実装。 コマンドラインから実際にサイト内を操作できるギミックを搭載しました。',
 			en: 'This is my portfolio website. Implemented with Svelte5. It features a gimmick that allows you to operate the site from the command line.'
 		},
 		tech: [
@@ -41,17 +41,20 @@ export const worksData: Work[] = [
 		isFeatured: true
 	},
 	{
-		id: 'tool-b',
-		name: 'Convenient Tool B',
+		id: 'colab-poker',
+		name: 'colab-poker',
 		images: [
-			/*'/images/tool-b.png'*/
+			'/images/colab-poker/screenshot_1.png',
+			'/images/colab-poker/screenshot_2.png',
+			'/images/colab-poker/screenshot_3.png',
+			'/images/colab-poker/screenshot_4.png'
 		],
 		description: {
-			ja: 'Pythonで作った便利なスクリプト。',
-			en: 'A convenient script created with Python.'
+			ja: 'Google Colabを用いて作成したJupyter環境で動作するポーカーゲーム。 GithubのREADMEにあるリンクからGoogle Colab環境で遊ぶことができます。',
+			en: 'A poker game that runs in a Jupyter environment built using Google Colab. You can play the game directly in Google Colab by following the link provided in the GitHub README.'
 		},
 		tech: [{ bg: 'python', textColor: 'python-dark', label: ' Python' }],
-		repoUrl: 'https://github.com/rirannda/tool-b',
-		isFeatured: false
+		repoUrl: 'https://github.com/rirannda/colab-poker',
+		isFeatured: true
 	}
 ];

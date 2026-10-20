@@ -95,12 +95,29 @@ export const skillsData: Skill[] = [
 		},
 		description: {
 			ja: '実習や簡単なスクリプト作成に使用経験あり。',
-			en: 'I have experience using it in internships and simple script creation.'
+			en: 'I have experience using it in practical training and simple script creation.'
 		},
 		group: 'Language',
 		url: 'https://www.python.org/',
 		urltext: 'Python Official Site',
 		color: 'python'
+	},
+	{
+		id: 'arduino',
+		logo: '',
+		name: 'Arduino',
+		level: {
+			ja: '入門レベル',
+			en: 'introductory'
+		},
+		description: {
+			ja: '実習で使用経験あり。',
+			en: 'Experienced in using it during practical training '
+		},
+		group: 'Language',
+		url: 'https://docs.arduino.cc/language-reference/',
+		urltext: 'Arduino language-reference',
+		color: 'arduino'
 	},
 	{
 		id: 'rust',
@@ -197,7 +214,7 @@ export const skillsData: Skill[] = [
 		},
 		description: {
 			ja: '日常的に使用しているエディタ。',
-			en: 'Editor I use daily.'
+			en: 'Editor I used daily.'
 		},
 		group: 'Tools',
 		url: 'https://code.visualstudio.com/',

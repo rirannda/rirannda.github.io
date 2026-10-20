@@ -13,14 +13,14 @@
 	const defaultPrompt = $derived([
 		'visitor@PortfoliOS',
 		':',
-		`~/portfolio${terminal.currentPath == '/' ? '' : terminal.currentPath}`,
+		`~/portfolio${terminal.currentPath === '/' ? '' : terminal.currentPath}`,
 		'$ cd ~/portfolio/top'
 	]);
 
 	const compactPrompt = $derived.by(() => {
 		const path = terminal.currentPath === '/' ? '/top' : terminal.currentPath;
 		const last = path.split('/').filter(Boolean).pop() ?? 'top';
-		return ['...', last == 'top' ? '/portfolio' : '/portfolio/' + last, '$ cd top'];
+		return ['...', last === 'top' ? '/portfolio' : '/portfolio/' + last, '$ cd top'];
 	});
 
 	function toggleTheme() {

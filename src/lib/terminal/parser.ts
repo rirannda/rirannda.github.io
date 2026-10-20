@@ -142,7 +142,7 @@ export async function parseCommand(input: string, Path: string) {
 			if (args.length > 1) {
 				return { response: `cd: too many arguments`, isError: true };
 			}
-			let target = args[0] == '' ? '/' : args[0];
+			let target = args[0] === '' ? '/' : args[0];
 
 			const sections = ['top', 'about', 'skills', 'featured', 'contact'];
 
@@ -172,7 +172,7 @@ export async function parseCommand(input: string, Path: string) {
 			if (target === '.' || target === Path) {
 				return { response: '' };
 			}
-			if (target == '/root' || target == '/etc' || target == '/var' || target == '/usr') {
+			if (target === '/root' || target === '/etc' || target === '/var' || target === '/usr') {
 				return { response: `cd: permission denied: ${target}`, isError: true };
 			}
 			return { response: `cd: no such file or directory: ${target}`, isError: true };
@@ -182,7 +182,7 @@ export async function parseCommand(input: string, Path: string) {
 				return { response: `ls: too many arguments`, isError: true };
 			}
 
-			let target = args[0] == '' ? '.' : args[0];
+			let target = args[0] === '' ? '.' : args[0];
 
 			if (
 				target.startsWith('/home/visitor/portfolio') ||
@@ -194,41 +194,41 @@ export async function parseCommand(input: string, Path: string) {
 				target = target.replace(/\/+$/, ''); // パスの末尾のスラッシュを削除
 			}
 
-			if ((Path == '/' && target == '.') || target == '/') {
+			if ((Path === '/' && target === '.') || target === '/') {
 				return { response: ['about featured skills contact /works'] };
 			}
 			if (
-				(Path == '/about' && target == '.') ||
-				target == '/about' ||
-				(Path == '' && target == 'about')
+				(Path === '/about' && target === '.') ||
+				target === '/about' ||
+				(Path === '' && target === 'about')
 			) {
 				return { response: ['+page.svelte'] };
 			}
 			if (
-				(Path == '/featured' && target == '.') ||
-				target == '/featured' ||
-				(Path == '' && target == 'featured')
+				(Path === '/featured' && target === '.') ||
+				target === '/featured' ||
+				(Path === '' && target === 'featured')
 			) {
 				return { response: ['+page.svelte'] };
 			}
 			if (
-				(Path == '/skills' && target == '.') ||
-				target == '/skills' ||
-				(Path == '' && target == 'skills')
+				(Path === '/skills' && target === '.') ||
+				target === '/skills' ||
+				(Path === '' && target === 'skills')
 			) {
 				return { response: ['+page.svelte'] };
 			}
 			if (
-				(Path == '/contact' && target == '.') ||
-				target == '/contact' ||
-				(Path == '' && target == 'contact')
+				(Path === '/contact' && target === '.') ||
+				target === '/contact' ||
+				(Path === '' && target === 'contact')
 			) {
 				return { response: ['+page.svelte'] };
 			}
 			if (
-				(Path == '/works' && target == '.') ||
-				target == '/works' ||
-				(Path == '' && target == 'works')
+				(Path === '/works' && target === '.') ||
+				target === '/works' ||
+				(Path === '' && target === 'works')
 			) {
 				return { response: ['+page.svelte'] };
 			}
