@@ -3,6 +3,7 @@ export type TerminalLine = {
 	command: string;
 	response: string | string[]; // 複数行のレスポンス（neofetch等）に対応するため配列も許容
 	isError?: boolean;
+	historyEntries?: { number: number; command: string }[];
 };
 
 class TerminalState {
@@ -14,8 +15,14 @@ class TerminalState {
 	isTerminalEnabled = $state(false); // ターミナルが展開されているかどうか
 	isHistoryOpened = $state(false);
 
-	pushOutput(path: string, command: string, response: string | string[], isError = false) {
-		this.output.push({ path, command, response, isError });
+	pushOutput(
+		path: string,
+		command: string,
+		response: string | string[],
+		isError = false,
+		historyEntries?: TerminalLine['historyEntries']
+	) {
+		this.output.push({ path, command, response, isError, historyEntries });
 		if (this.output.length > 500) {
 			this.output.splice(0, this.output.length - 500);
 		}

@@ -24,7 +24,8 @@
 		| 'github'
 		| 'docker'
 		| 'tailwind'
-		| 'arduino';
+		| 'arduino'
+		| 'cpp';
 
 	const colorClasses: Record<
 		SkillColorKey,
@@ -129,6 +130,11 @@
 			hoverBorder: 'hover:border-arduino',
 			hoverText: 'group-hover:text-arduino',
 			text: 'text-arduino'
+		},
+		cpp: {
+			hoverBorder: 'hover:border-cpp',
+			hoverText: 'group-hover:text-cpp',
+			text: 'text-cpp'
 		}
 	};
 

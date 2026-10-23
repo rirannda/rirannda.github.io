@@ -2,25 +2,37 @@
 	import { onMount } from 'svelte';
 	import type { Work } from '$lib/data/works';
 	import { langState } from '$lib/state/langState.svelte';
+	import { dict } from '$lib/i18n/dict';
 
 	let { work }: { work: Work } = $props();
 
 	const currentDescription = $derived(work.description[langState.current]);
+	const t = $derived(dict[langState.current].workCard);
 
 	let currentIndex = $state(0);
+	let isPaused = $state(false);
+	const focusStyle =
+		'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-archlinux';
 
 	onMount(() => {
-		// 画像が複数ある場合のみタイマーを起動
-		if (work.images && work.images.length > 0) {
-			const interval = setInterval(() => {
-				if (work.images) {
-					currentIndex = (currentIndex + 1) % work.images.length;
-				}
-			}, 3000); // 3000ミリ秒（3秒）ごとに切り替え
-
-			return () => clearInterval(interval);
-		}
+		isPaused = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	});
+
+	$effect(() => {
+		const imageCount = work.images?.length ?? 0;
+		if (imageCount <= 1 || isPaused) return;
+		const interval = setInterval(() => {
+			currentIndex = (currentIndex + 1) % imageCount;
+		}, 3000);
+		return () => clearInterval(interval);
+	});
+
+	function changeImage(direction: number) {
+		const count = work.images?.length ?? 0;
+		if (!count) return;
+		isPaused = true;
+		currentIndex = (currentIndex + direction + count) % count;
+	}
 </script>
 
 <div
@@ -34,6 +46,7 @@
 				<img
 					src={img}
 					alt={`${work.name} screenshot ${i + 1}`}
+					aria-hidden={i !== currentIndex}
 					loading="lazy"
 					width="640"
 					height="360"
@@ -43,6 +56,35 @@
 				/>
 			{/each}
 		</div>
+		{#if work.images.length > 1}
+			<div
+				class="mb-3 gap-3 px-3 text-sm flex flex-wrap items-center justify-center"
+				role="group"
+				aria-label={`${work.name}: ${t.images}`}
+			>
+				<button
+					type="button"
+					aria-label={t.previous}
+					onclick={() => changeImage(-1)}
+					class={`rounded border-gray-400 px-3 py-1 cursor-pointer border ${focusStyle}`}>←</button
+				>
+				<span aria-live={isPaused ? 'polite' : 'off'}
+					>{currentIndex + 1} / {work.images.length}</span
+				>
+				<button
+					type="button"
+					aria-label={t.next}
+					onclick={() => changeImage(1)}
+					class={`rounded border-gray-400 px-3 py-1 cursor-pointer border ${focusStyle}`}>→</button
+				>
+				<button
+					type="button"
+					onclick={() => (isPaused = !isPaused)}
+					class={`rounded border-gray-400 px-3 py-1 cursor-pointer border ${focusStyle}`}
+					>{isPaused ? t.play : t.pause}</button
+				>
+			</div>
+		{/if}
 	{/if}
 	<div class="px-5 py-2 flex flex-col">
 		<h3 class="mb-3 text-2xl font-bold transition-colors">
@@ -52,6 +94,22 @@
 		<p class="mb-4 text-lg grow opacity-80">
 			{currentDescription}
 		</p>
+		{#if work.role || work.highlights}
+			<dl class="mb-4 space-y-3">
+				{#if work.role}
+					<div>
+						<dt class="font-bold">{t.role}</dt>
+						<dd class="mt-1 opacity-80">{work.role[langState.current]}</dd>
+					</div>
+				{/if}
+				{#if work.highlights}
+					<div>
+						<dt class="font-bold">{t.highlights}</dt>
+						<dd class="mt-1 opacity-80">{work.highlights[langState.current]}</dd>
+					</div>
+				{/if}
+			</dl>
+		{/if}
 	</div>
 	<div class="my-2 px-3 mt-auto flex flex-col opacity-90">
 		<div class="px-2">
@@ -67,9 +125,18 @@
 			href={work.repoUrl}
 			target="_blank"
 			rel="noopener noreferrer external"
-			class="rounded border-gray-400 px-5 md:px-15 mx-5 py-2 my-4 font-mono hover:bg-gray-100 dark:hover:bg-gray-800 mt-8 inline-block w-3/4 self-center border text-center transition-colors"
+			class={`rounded border-gray-400 px-5 md:px-15 mx-5 py-2 my-4 font-mono hover:bg-gray-100 dark:hover:bg-gray-800 mt-8 inline-block w-3/4 self-center border text-center transition-colors ${focusStyle}`}
 		>
 			<span class="text-xl font-hack"></span> View on GitHub
 		</a>
+		{#if work.demoUrl}
+			<a
+				href={work.demoUrl}
+				target="_blank"
+				rel="noopener noreferrer external"
+				class={`mx-5 mb-4 rounded border-archlinux px-5 py-2 font-mono hover:bg-archlinux/15 w-3/4 self-center border text-center transition-colors ${focusStyle}`}
+				>{t.demo}</a
+			>
+		{/if}
 	</div>
 </div>

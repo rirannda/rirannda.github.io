@@ -1,11 +1,13 @@
+export type LocalizedText = { ja: string; en: string };
+
 export type Work = {
 	id: string;
 	name: string;
 	images?: string[]; // スクリーンショットのパス
-	description: {
-		ja: string;
-		en: string;
-	};
+	description: LocalizedText;
+	role?: LocalizedText;
+	highlights?: LocalizedText;
+	demoUrl?: string;
 	tech: { bg: string; textColor: string; label: string }[];
 	repoUrl: string;
 	isFeatured: boolean; // trueのものはトップページにも表示する
@@ -55,6 +57,21 @@ export const worksData: Work[] = [
 		},
 		tech: [{ bg: 'python', textColor: 'python-dark', label: ' Python' }],
 		repoUrl: 'https://github.com/rirannda/colab-poker',
+		isFeatured: true
+	},
+	{
+		id: 'monakime',
+		name: 'MonakIME',
+		images: [], // 画像追加後に '/images/MonakIME/screenshot_1.png' などを指定
+		description: {
+			ja: 'Linuxのfcitx5向けに開発中の日本語IME。Mozcによるライブ変換と、CPUで動作するZenzモデルによる変換候補の追加を組み合わせています。主要な処理をRust、fcitx5・llama.cppとの接続部分をC++で実装しています。',
+			en: 'An experimental Japanese IME for fcitx5 on Linux. It combines Mozc live conversion with additional conversion candidates from a Zenz model running on the CPU. Core logic is implemented in Rust, with C++ adapters for fcitx5 and llama.cpp.'
+		},
+		tech: [
+			{ bg: 'rust', textColor: 'lighttext', label: ' Rust' },
+			{ bg: 'cpp', textColor: 'lighttext', label: ' C++' }
+		],
+		repoUrl: 'https://github.com/rirannda/MonakIME',
 		isFeatured: true
 	}
 ];

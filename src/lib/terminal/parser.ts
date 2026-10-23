@@ -1,247 +1,161 @@
 import { goto } from '$app/navigation';
 import { resolve } from '$app/paths';
-import { terminal } from '$lib/state/terminalState.svelte';
+import { terminal, type TerminalLine } from '$lib/state/terminalState.svelte';
 import { os } from '$lib/state/osState.svelte';
 import { theme } from '$lib/state/themeState.svelte';
-import { helpTexts } from './helpTexts';
+import { langState } from '$lib/state/langState.svelte';
+import { dict } from '$lib/i18n/dict';
+import { availableCommands, helpTexts, type CommandName } from './helpTexts';
+import {
+	findProject,
+	isDirectory,
+	listDirectory,
+	portfolioHome,
+	readPortfolioFile,
+	resolvePortfolioPath
+} from './filesystem';
 
-async function getHelpText(command: string) {
-	const text: string | string[] = helpTexts[command];
-	return { response: text || `No help available for '${command}'.` };
+export { availableCommands } from './helpTexts';
+export { availableDirs } from './filesystem';
+
+export type CommandResult = {
+	response: string | string[];
+	isError?: boolean;
+	skipOutput?: boolean;
+	historyEntries?: TerminalLine['historyEntries'];
+	action?: { type: 'open'; url: string };
+};
+
+function getHelpText(command: string): CommandResult {
+	if (!Object.hasOwn(helpTexts, command)) {
+		return { response: `No help available for '${command}'.` };
+	}
+	const help = helpTexts[command as CommandName];
+	return { response: [`Usage: ${help.usage}`, help.description[langState.current]] };
 }
 
-export const availableCommands = [
-	'help',
-	'echo',
-	'cd',
-	'ls',
+const noArgumentsCommands = new Set([
 	'pwd',
+	'clear',
 	'reset',
+	'history',
 	'whoami',
 	'date',
 	'uname',
 	'reboot',
-	'sudo',
 	'su',
-	'theme',
 	'fakefetch',
 	'welcome',
-	'open',
 	'thanks',
 	'exit'
-];
+]);
 
-export const availableDirs = ['top', 'about', 'featured', 'skills', 'contact', 'works'];
-
-export async function parseCommand(input: string, Path: string) {
-	// 空白で分割（連続する空白にも対応させるなら正規表現 /\s+/ が便利です）
-	const tokens = input.trim().split(/\s+/);
-	if (tokens.length === 1) {
-		tokens.push('');
-	} // コマンドのみの場合、tokens[1]がundefinedになるのを防ぐため空文字を追加
-	const command = tokens[0];
-	const options: string[] = [];
-	const args: string[] = []; // argsは必ずlength > 1 (''をpushしてあるため)
-
-	const noOptionCommands: Readonly<Record<string, string>> = {
-		help: 'help [command]',
-		echo: 'echo [text]',
-		cd: 'cd [directory]',
-		ls: 'ls [directory]',
-		pwd: 'pwd',
-		reset: 'reset',
-		whoami: 'whoami',
-		date: 'date',
-		uname: 'uname',
-		reboot: 'reboot',
-		sudo: 'sudo [command]',
-		su: 'su',
-		theme: 'theme <light|dark>',
-		fakefetch: 'fakefetch',
-		welcome: 'welcome',
-		open: 'open [target]',
-		thanks: 'thanks',
-		exit: 'exit'
-	};
-	const noArgumentsCommands = new Set([
-		'reset',
-		'whoami',
-		'date',
-		'uname',
-		'reboot',
-		'fakefetch',
-		'welcome',
-		'thanks',
-		'exit'
-	]);
-
-	for (let i = 1; i < tokens.length; i++) {
-		// tokensのうち最初の要素(コマンド)以外を処理
-		const t = tokens[i];
-		if (t.startsWith('-')) {
-			options.push(t);
-		} else {
-			args.push(t);
-		}
+export async function parseCommand(input: string, currentPath: string): Promise<CommandResult> {
+	const tokens = (input.trim().match(/"[^"]*"|'[^']*'|\S+/g) ?? []).map((token) =>
+		/^(["']).*\1$/s.test(token) ? token.slice(1, -1) : token
+	);
+	const [command, ...args] = tokens;
+	if (!command) return { response: '', skipOutput: true };
+	if (!Object.hasOwn(helpTexts, command)) {
+		return { response: `Command not found: ${command}`, isError: true };
 	}
 
-	if (options.includes('-h') || options.includes('--help')) {
-		return getHelpText(command);
-	}
-
-	if (options.length > 0 && !(command in noOptionCommands)) {
+	if (args.includes('-h') || args.includes('--help')) return getHelpText(command);
+	if (command !== 'echo' && command !== 'sudo' && args.some((arg) => arg.startsWith('-'))) {
 		return {
-			response: `The '${command}' command does not take any options. Usage: ${noOptionCommands[command] || 'No usage information available.'}`,
+			response: `The '${command}' command does not take any options. Usage: ${helpTexts[command as CommandName].usage}`,
 			isError: true
 		};
 	}
-	if (
-		args.length > 0 &&
-		!(args.length === 1 && args[0] === '') &&
-		noArgumentsCommands.has(command)
-	) {
+	if (args.length > 0 && noArgumentsCommands.has(command)) {
 		return { response: `The '${command}' command does not take any arguments.`, isError: true };
 	}
 
 	switch (command) {
 		case 'help': {
-			// 引数がない場合 (argsが [''] のみの場合)
-			if (args.length === 1 && args[0] === '') {
+			if (args.length === 0) {
 				return {
-					response:
-						'Available commands: help, cd, date, echo, fakefetch, ls, pwd, reboot, reset, uname, welcome, whoami, open, thanks, exit'
+					response: [
+						`${dict[langState.current].terminal.available}: ${availableCommands.join(', ')}`
+					]
 				};
 			}
-
-			const combinedHelpTexts: string[] = [];
-
-			// 引数に指定されたコマンドを順番に処理する
-			for (let index = 0; index < args.length; index++) {
-				const targetCmd = args[index];
-				if (targetCmd === '') continue; // 空文字の場合はスキップ
-
-				// 1. await を付けて結果を待つ
-				const helpResult = await getHelpText(targetCmd);
-
-				// 2. 結果が配列(複数行)か文字列(1行)かで処理を分ける
-				if (Array.isArray(helpResult.response)) {
-					combinedHelpTexts.push(...helpResult.response); // 配列を展開して追加
-				} else {
-					combinedHelpTexts.push(String(helpResult.response)); // そのまま追加
-				}
-
-				// コマンドとコマンドの間に空行を挟む
-				combinedHelpTexts.push('');
-			}
-
-			return { response: combinedHelpTexts };
+			return { response: args.flatMap((name) => [getHelpText(name).response, ''].flat()) };
 		}
 		case 'echo':
 			return { response: args.join(' ') };
 		case 'cd': {
-			if (args.length > 1) {
-				return { response: `cd: too many arguments`, isError: true };
-			}
-			let target = args[0] === '' ? '/' : args[0];
-
-			const sections = ['top', 'about', 'skills', 'featured', 'contact'];
-
-			if (target === '/home/visitor/portfolio') {
-				target = '/';
-			}
-
-			if (target.startsWith('/home/visitor/portfolio/')) {
-				target = target.replace('/home/visitor/portfolio/', '/'); // カレントディレクトリを表す部分を削除
-			}
-			if (target.endsWith('/') && target !== '/') {
-				target = target.replace(/\/+$/, ''); // パスの末尾のスラッシュを削除
-			}
-
-			if (target === '~' || target === '/') {
-				await goto(resolve('/#top'));
-				return { response: '' };
-			}
-			if (sections.includes(target)) {
-				await goto(resolve(`/#${target}`));
-				return { response: '' };
-			}
-			if (target === 'works') {
-				await goto(resolve('/works'));
-				return { response: '' };
-			}
-			if (target === '.' || target === Path) {
-				return { response: '' };
-			}
-			if (target === '/root' || target === '/etc' || target === '/var' || target === '/usr') {
+			if (args.length > 1) return { response: 'cd: too many arguments', isError: true };
+			const target = args[0] || '/';
+			const path = resolvePortfolioPath(target, currentPath);
+			if (['/root', '/etc', '/var', '/usr'].includes(path)) {
 				return { response: `cd: permission denied: ${target}`, isError: true };
 			}
-			return { response: `cd: no such file or directory: ${target}`, isError: true };
+			if (!isDirectory(path)) {
+				return { response: `cd: no such file or directory: ${target}`, isError: true };
+			}
+			if (path !== resolvePortfolioPath('.', currentPath)) {
+				if (path === '/projects') await goto(resolve('/works'), { keepFocus: true });
+				else if (path === '/') await goto(resolve('/#top'), { keepFocus: true });
+				else await goto(resolve(`/#${path.slice(1)}`), { keepFocus: true });
+			}
+			terminal.currentPath = path;
+			return { response: '' };
 		}
 		case 'ls': {
-			if (args.length > 1) {
-				return { response: `ls: too many arguments`, isError: true };
+			if (args.length > 1) return { response: 'ls: too many arguments', isError: true };
+			const target = args[0] || '.';
+			const listing = listDirectory(resolvePortfolioPath(target, currentPath));
+			return listing
+				? { response: listing }
+				: { response: `ls: cannot access '${target}': No such file or directory`, isError: true };
+		}
+		case 'cat': {
+			if (args.length === 0) return { response: 'Usage: cat <name|path> [...]', isError: true };
+			const response: string[] = [];
+			let isError = false;
+			for (const target of args) {
+				const contents = readPortfolioFile(target, currentPath, langState.current);
+				if (response.length) response.push('');
+				if (contents) response.push(...contents);
+				else {
+					response.push(`cat: ${target}: No such file or directory`);
+					isError = true;
+				}
 			}
-
-			let target = args[0] === '' ? '.' : args[0];
-
-			if (
-				target.startsWith('/home/visitor/portfolio') ||
-				target.startsWith('/home/visitor/portfolio/')
-			) {
-				target = target.replace('/home/visitor/portfolio', '/'); // カレントディレクトリを表す部分を削除
-			}
-			if (target.endsWith('/') && target !== '/') {
-				target = target.replace(/\/+$/, ''); // パスの末尾のスラッシュを削除
-			}
-
-			if ((Path === '/' && target === '.') || target === '/') {
-				return { response: ['about featured skills contact /works'] };
-			}
-			if (
-				(Path === '/about' && target === '.') ||
-				target === '/about' ||
-				(Path === '' && target === 'about')
-			) {
-				return { response: ['+page.svelte'] };
-			}
-			if (
-				(Path === '/featured' && target === '.') ||
-				target === '/featured' ||
-				(Path === '' && target === 'featured')
-			) {
-				return { response: ['+page.svelte'] };
-			}
-			if (
-				(Path === '/skills' && target === '.') ||
-				target === '/skills' ||
-				(Path === '' && target === 'skills')
-			) {
-				return { response: ['+page.svelte'] };
-			}
-			if (
-				(Path === '/contact' && target === '.') ||
-				target === '/contact' ||
-				(Path === '' && target === 'contact')
-			) {
-				return { response: ['+page.svelte'] };
-			}
-			if (
-				(Path === '/works' && target === '.') ||
-				target === '/works' ||
-				(Path === '' && target === 'works')
-			) {
-				return { response: ['+page.svelte'] };
-			}
-			return {
-				response: `ls: cannot access '${target}': No such file or directory`,
-				isError: true
-			};
+			return { response, isError };
 		}
 		case 'pwd':
-			return { response: '/home/visitor/portfolio' + Path };
+			return {
+				response:
+					portfolioHome +
+					(resolvePortfolioPath('.', currentPath) === '/'
+						? ''
+						: resolvePortfolioPath('.', currentPath))
+			};
+		case 'clear':
 		case 'reset':
 			terminal.clearOutput();
-			return { response: '' };
+			return { response: '', skipOutput: true };
+		case 'history': {
+			const historyEntries = terminal.history.map((command, index) => ({
+				number: index + 1,
+				command
+			}));
+			return {
+				response: historyEntries.length
+					? historyEntries.map((entry) => `${entry.number}  ${entry.command}`)
+					: dict[langState.current].terminal.historyEmpty,
+				historyEntries
+			};
+		}
+		case 'lang': {
+			if (args.length !== 1 || (args[0] !== 'ja' && args[0] !== 'en')) {
+				return { response: 'Usage: lang <ja|en>', isError: true };
+			}
+			langState.setLanguage(args[0]);
+			return { response: dict[langState.current].terminal.languageChanged };
+		}
 		case 'whoami':
 			return { response: 'visitor' };
 		case 'date':
@@ -252,12 +166,10 @@ export async function parseCommand(input: string, Path: string) {
 			os.setRebooting(true);
 			return { response: 'Broadcast message from system: System is going down for reboot NOW!' };
 		case 'sudo':
-			// 引数がない場合 (argsが [''] のみの場合)
-			if (args.length === 1 && args[0] === '') {
-				return { response: `Usage: sudo [command]` };
-			}
 			return {
-				response: 'sudo: visitor is not in the sudoers file. This incident will not be reported.'
+				response: args.length
+					? 'sudo: visitor is not in the sudoers file. This incident will not be reported.'
+					: 'Usage: sudo [command]'
 			};
 		case 'su':
 			return { response: 'su: permission denied' };
@@ -275,68 +187,50 @@ export async function parseCommand(input: string, Path: string) {
 				]
 			};
 		case 'theme': {
-			if (args.length > 1) {
-				return { response: `theme: too many arguments. Usage: theme <light|dark>`, isError: true };
-			}
-			const mode = args[0]?.toLowerCase();
-
-			if (mode === 'dark') {
-				theme.setTheme('dark');
-				return { response: 'Theme changed to dark mode.' };
-			} else if (mode === 'light') {
-				theme.setTheme('light');
-				return { response: 'Theme changed to light mode.' };
-			} else {
+			if (
+				args.length !== 1 ||
+				(args[0].toLowerCase() !== 'dark' && args[0].toLowerCase() !== 'light')
+			) {
 				return {
-					response: `theme: invalid mode ${mode || ''}. Usage: theme <light|dark>`,
+					response: `theme: invalid mode ${args.join(' ')}. Usage: theme <light|dark>`,
 					isError: true
 				};
 			}
+			const mode = args[0].toLowerCase() as 'light' | 'dark';
+			theme.setTheme(mode);
+			return { response: `Theme changed to ${mode} mode.` };
 		}
 		case 'welcome':
-			return {
-				response: [
-					'Welcome to the portfolio of rirannda!',
-					"Type 'help' to see the list of available commands.",
-					'Feel free to explore and have fun!'
-				]
-			};
+			return { response: dict[langState.current].terminal.welcome };
 		case 'open': {
-			if (args.length > 1) {
-				return { response: `open: too many arguments. Usage: open [target]`, isError: true };
-			}
-			if (args[0] === '') {
-				return { response: `Usage: open [target]`, isError: true };
+			if (args.length < 1 || args.length > 2) {
+				return { response: `Usage: ${helpTexts.open.usage}`, isError: true };
 			}
 			const target = args[0].toLowerCase();
 			const links: Record<string, string> = {
 				github: 'https://github.com/rirannda',
 				discord: 'https://discord.com/users/924197940103372831'
 			};
-			const textTarget: Record<string, string> = {
-				github: 'Opening GitHub.com ...',
-				discord: 'Opening Discord.com ...'
-			};
-			if (target in links) {
-				return { response: `${textTarget[target]}`, action: { type: 'open', url: links[target] } };
-			} else {
-				return {
-					response: `open: unknown target '${target}'. Available targets: ${Object.keys(links).join(', ')}`,
-					isError: true
-				};
+			if (Object.hasOwn(links, target) && args.length === 1) {
+				return { response: `Opening ${target} ...`, action: { type: 'open', url: links[target] } };
 			}
+			const project = findProject(target);
+			if (project && (!args[1] || args[1] === 'repo' || args[1] === 'demo')) {
+				const url = args[1] === 'demo' ? project.demoUrl : project.repoUrl;
+				return url
+					? { response: `Opening ${project.name} ...`, action: { type: 'open', url } }
+					: { response: `open: no demo configured for '${project.id}'`, isError: true };
+			}
+			return { response: `open: unknown target '${args.join(' ')}'`, isError: true };
 		}
 		case 'thanks':
 			return {
-				response: [
+				response:
 					'Inspired by the amazing dev community. Thank you to all creators who share their code and ideas!'
-				]
 			};
 		case 'exit':
 			terminal.isTerminalEnabled = false;
-			return {
-				response: ''
-			};
+			return { response: '' };
 		default:
 			return { response: `Command not found: ${command}`, isError: true };
 	}

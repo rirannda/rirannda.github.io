@@ -137,6 +137,23 @@ export const skillsData: Skill[] = [
 		color: 'rust'
 	},
 	{
+		id: 'cpp',
+		logo: '',
+		name: 'C++',
+		level: {
+			ja: '入門レベル',
+			en: 'introductory'
+		},
+		description: {
+			ja: '鋭意学習中。',
+			en: 'Currently studying intensively.'
+		},
+		group: 'Language',
+		url: 'https://learn.microsoft.com/ja-jp/cpp/cpp/cpp-language-reference',
+		urltext: 'MicroSoft C++ Reference',
+		color: 'cpp'
+	},
+	{
 		id: 'svelte',
 		logo: '',
 		name: 'Svelte',

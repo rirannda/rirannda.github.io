@@ -12,7 +12,7 @@
 		const sections = Array.from(document.querySelectorAll<HTMLElement>('section[id]'));
 
 		const setCurrentPath = (id: string) => {
-			terminal.currentPath = id === 'top' ? '/' : `/${id}`;
+			terminal.currentPath = id === 'works' ? '/projects' : id === 'top' ? '/' : `/${id}`;
 		};
 
 		const handleScroll = () => {

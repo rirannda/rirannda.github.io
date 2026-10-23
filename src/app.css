@@ -25,6 +25,7 @@
 	--color-tailwind: #01bbff;
 	--color-arduino: #25c2c7;
 	--color-wsl: #0272ca;
+	--color-cpp: #6295cb;
 	--font-hack: 'Hack Nerd Font Mono', monospace;
 }
 
@@ -225,6 +226,16 @@
 	}
 	.border-tailwind {
 		border-color: var(--color-tailwind);
+	}
+
+	.bg-cpp {
+		background-color: var(--color-cpp);
+	}
+	.text-cpp {
+		color: var(--color-cpp);
+	}
+	.border-cpp {
+		border-color: var(--color-cpp);
 	}
 }
 
