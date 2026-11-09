@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import type { Work } from '$lib/data/works';
+	import { getTech } from '$lib/data/techs';
+	import TechIcon from './TechIcon.svelte';
 	import { langState } from '$lib/state/langState.svelte';
 	import { dict } from '$lib/i18n/dict';
 
@@ -113,10 +115,14 @@
 	</div>
 	<div class="my-2 px-3 mt-auto flex flex-col opacity-90">
 		<div class="px-2">
-			{#each work.tech as tech, i (i)}
+			{#each work.tech as techId, i (i)}
+				{@const tech = getTech(techId)}
 				<span
-					class={`bg-${tech.bg} mx-1 md:px-2 px-2 my-1 md:py-1 font-hack inline-block w-fit dark:text-${tech.textColor} text-${tech.textColor} rounded-full`}
+					class="mx-1 px-2 my-1 md:py-1 font-hack gap-2 inline-flex w-fit items-center rounded-full"
+					style:background-color={tech.color}
+					style:color={tech.textColor ?? 'var(--color-lighttext)'}
 				>
+					<TechIcon icon={tech.icon} />
 					{tech.label}
 				</span>
 			{/each}

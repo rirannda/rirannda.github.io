@@ -1,5 +1,6 @@
 import { worksData } from '../data/works';
 import { skillsData } from '../data/skills';
+import { getTech } from '../data/techs';
 import { dict } from '../i18n/dict';
 
 export const portfolioHome = '/home/visitor/portfolio';
@@ -46,7 +47,7 @@ export function findProject(name: string) {
 export function findSkill(name: string) {
 	const key = name.toLowerCase();
 	return skillsData.find(
-		(skill) => skill.id.toLowerCase() === key || skill.name.toLowerCase() === key
+		(skill) => skill.id.toLowerCase() === key || getTech(skill.id).label.toLowerCase() === key
 	);
 }
 
@@ -99,7 +100,7 @@ export function readPortfolioFile(target: string, currentPath: string, language:
 		return [
 			project.name,
 			project.description[language],
-			`${t.workCard.tech}: ${project.tech.map((tech) => tech.label.replace(/^[^\w]+/u, '')).join(', ')}`,
+			`${t.workCard.tech}: ${project.tech.map((id) => getTech(id).label).join(', ')}`,
 			...(project.role ? [`${t.workCard.role}: ${project.role[language]}`] : []),
 			...(project.highlights ? [`${t.workCard.highlights}: ${project.highlights[language]}`] : []),
 			`GitHub: ${project.repoUrl}`,
@@ -110,7 +111,7 @@ export function readPortfolioFile(target: string, currentPath: string, language:
 	const skill = findSkill(name);
 	if (skill && (isBareName || (parts.length === 2 && parts[0] === 'skills'))) {
 		return [
-			`${skill.name} (${skill.level[language]})`,
+			`${getTech(skill.id).label} (${skill.level[language]})`,
 			skill.description[language],
 			`${skill.urltext}: ${skill.url}`
 		];

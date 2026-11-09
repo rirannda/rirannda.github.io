@@ -12,6 +12,9 @@ let langState;
 let worksData;
 let visits;
 let WorkCard;
+let SkillCard;
+let getTech;
+let skillsData;
 let render;
 
 before(async () => {
@@ -45,8 +48,11 @@ before(async () => {
 	({ terminal } = await server.ssrLoadModule('/src/lib/state/terminalState.svelte.ts'));
 	({ langState } = await server.ssrLoadModule('/src/lib/state/langState.svelte.ts'));
 	({ worksData } = await server.ssrLoadModule('/src/lib/data/works.ts'));
+	({ skillsData } = await server.ssrLoadModule('/src/lib/data/skills.ts'));
+	({ getTech } = await server.ssrLoadModule('/src/lib/data/techs.ts'));
 	({ visits } = await server.ssrLoadModule('$app/navigation'));
 	({ default: WorkCard } = await server.ssrLoadModule('/src/lib/components/WorkCard.svelte'));
+	({ default: SkillCard } = await server.ssrLoadModule('/src/lib/components/SkillCard.svelte'));
 	({ render } = await server.ssrLoadModule('svelte/server'));
 });
 
@@ -99,6 +105,7 @@ test('ls projects and ls skills list the actual data; ls about works at the root
 });
 
 test('cat reads projects and skills by ID, name, and explicit path in both languages', async () => {
+	const project = worksData.find((work) => work.id === 'typ-hl');
 	for (const command of [
 		'cat typ-hl',
 		'cat projects/typ-hl',
@@ -106,7 +113,7 @@ test('cat reads projects and skills by ID, name, and explicit path in both langu
 		'cat ~/portfolio/projects/typ-hl'
 	]) {
 		assert.ok(
-			(await parser.parseCommand(command, '/skills')).response.includes(worksData[1].description.ja)
+			(await parser.parseCommand(command, '/skills')).response.includes(project.description.ja)
 		);
 	}
 	assert.equal((await parser.parseCommand('cat PortfoliOS', '/')).response[0], 'PortfoliOS');
@@ -118,7 +125,12 @@ test('cat reads projects and skills by ID, name, and explicit path in both langu
 	assert.equal((await parser.parseCommand('cat /missing/about.txt', '/')).isError, true);
 	await parser.parseCommand('lang en', '/');
 	assert.ok(
-		(await parser.parseCommand('cat typ-hl', '/')).response.includes(worksData[1].description.en)
+		(await parser.parseCommand('cat typ-hl', '/')).response.includes(project.description.en)
+	);
+	assert.ok(
+		(await parser.parseCommand('cat portfolio-os', '/')).response.includes(
+			'Technologies: Svelte, Tailwind CSS, TypeScript'
+		)
 	);
 	assert.match((await parser.parseCommand('cat svelte', '/')).response[0], /intermediate/);
 });
@@ -182,7 +194,10 @@ test('open uses existing profile links and project repositories; demos are optio
 		(await parser.parseCommand('open discord', '/')).action.url,
 		'https://discord.com/users/924197940103372831'
 	);
-	assert.equal((await parser.parseCommand('open typ-hl', '/')).action.url, worksData[1].repoUrl);
+	assert.equal(
+		(await parser.parseCommand('open typ-hl', '/')).action.url,
+		worksData.find((work) => work.id === 'typ-hl').repoUrl
+	);
 	assert.equal(
 		(await parser.parseCommand('open PortfoliOS repo', '/')).action.url,
 		worksData[0].repoUrl
@@ -239,6 +254,24 @@ test('work cards only render configured optional fields and the matching demo li
 test('image controls appear only for projects with multiple screenshots', () => {
 	const single = render(WorkCard, { props: { work: worksData[0] } }).body;
 	assert.ok(!single.includes('前の画像'));
-	const multiple = render(WorkCard, { props: { work: worksData[2] } }).body;
+	const project = worksData.find((work) => work.id === 'colab-poker');
+	const multiple = render(WorkCard, { props: { work: project } }).body;
 	for (const label of ['前の画像', '次の画像', '一時停止']) assert.ok(multiple.includes(label));
+});
+
+test('work and skill cards resolve shared colors, labels, font glyphs, and SVG icons', () => {
+	const work = { ...worksData[0], tech: ['svelte', 'leaflet', 'scratch'] };
+	const html = render(WorkCard, { props: { work } }).body;
+	for (const id of work.tech) {
+		const tech = getTech(id);
+		assert.ok(html.includes(tech.label));
+		assert.ok(html.includes(`background-color: ${tech.color}`));
+		if (typeof tech.icon === 'string') assert.ok(html.includes(tech.icon));
+		else assert.ok(html.includes(`src="${tech.icon.src}"`));
+		const skillHtml = render(SkillCard, { props: { skill: { ...skillsData[0], id } } }).body;
+		assert.ok(skillHtml.includes(tech.label));
+		assert.ok(skillHtml.includes(`--tech-color: ${tech.color}`));
+		if (typeof tech.icon === 'string') assert.ok(skillHtml.includes(tech.icon));
+		else assert.ok(skillHtml.includes(`src="${tech.icon.src}"`));
+	}
 });

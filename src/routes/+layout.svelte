@@ -6,6 +6,7 @@
 	import RebootScreen from '$lib/components/RebootScreen.svelte';
 	import BootingScreen from '$lib/components/BootingScreen.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import { techColorStyles } from '$lib/data/techs';
 	import { os } from '$lib/state/osState.svelte';
 	import { onMount, tick } from 'svelte';
 
@@ -29,7 +30,11 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="flex min-h-screen flex-col" inert={os.isBooting || os.isRebooting}>
+<div
+	class="flex min-h-screen flex-col"
+	style={techColorStyles}
+	inert={os.isBooting || os.isRebooting}
+>
 	<Header />
 	<main>
 		{@render children()}

@@ -1,7 +1,7 @@
+import type { TechId } from './techs';
+
 export type Skill = {
-	id: string;
-	logo: string;
-	name: string;
+	id: TechId;
 	level: {
 		ja: '入門レベル' | '初級' | '中級' | '上級';
 		en: 'introductory' | 'beginner' | 'intermediate' | 'advanced';
@@ -13,14 +13,11 @@ export type Skill = {
 	group: 'Language' | 'Framework' | 'Library' | 'Tools' | 'Others';
 	url: string;
 	urltext: string;
-	color: string;
 };
 
 export const skillsData: Skill[] = [
 	{
-		id: 'HTML',
-		logo: '',
-		name: 'HTML',
+		id: 'html',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -31,13 +28,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://developer.mozilla.org/ja/docs/Web/HTML',
-		urltext: 'MDN Web Docs - HTML',
-		color: 'html'
+		urltext: 'MDN Web Docs - HTML'
 	},
 	{
 		id: 'typescript',
-		logo: '',
-		name: 'TypeScript',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -48,13 +42,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://www.typescriptlang.org/',
-		urltext: 'TypeScript Official Site',
-		color: 'typescript'
+		urltext: 'TypeScript Official Site'
 	},
 	{
 		id: 'javascript',
-		logo: '',
-		name: 'JavaScript',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -65,13 +56,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://developer.mozilla.org/ja/docs/Web/JavaScript',
-		urltext: 'MDN Web Docs - JavaScript',
-		color: 'javascript'
+		urltext: 'MDN Web Docs - JavaScript'
 	},
 	{
 		id: 'css',
-		logo: '',
-		name: 'CSS',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -82,13 +70,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://developer.mozilla.org/ja/docs/Web/CSS',
-		urltext: 'MDN Web Docs - CSS',
-		color: 'css'
+		urltext: 'MDN Web Docs - CSS'
 	},
 	{
 		id: 'python',
-		logo: '',
-		name: 'Python',
 		level: {
 			ja: '初級',
 			en: 'beginner'
@@ -99,13 +84,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://www.python.org/',
-		urltext: 'Python Official Site',
-		color: 'python'
+		urltext: 'Python Official Site'
 	},
 	{
 		id: 'arduino',
-		logo: '',
-		name: 'Arduino',
 		level: {
 			ja: '入門レベル',
 			en: 'introductory'
@@ -116,13 +98,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://docs.arduino.cc/language-reference/',
-		urltext: 'Arduino language-reference',
-		color: 'arduino'
+		urltext: 'Arduino language-reference'
 	},
 	{
 		id: 'rust',
-		logo: '',
-		name: 'Rust',
 		level: {
 			ja: '入門レベル',
 			en: 'introductory'
@@ -133,13 +112,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://www.rust-lang.org/',
-		urltext: 'Rust Official Site',
-		color: 'rust'
+		urltext: 'Rust Official Site'
 	},
 	{
 		id: 'cpp',
-		logo: '',
-		name: 'C++',
 		level: {
 			ja: '入門レベル',
 			en: 'introductory'
@@ -150,13 +126,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Language',
 		url: 'https://learn.microsoft.com/ja-jp/cpp/cpp/cpp-language-reference',
-		urltext: 'MicroSoft C++ Reference',
-		color: 'cpp'
+		urltext: 'MicroSoft C++ Reference'
 	},
 	{
 		id: 'svelte',
-		logo: '',
-		name: 'Svelte',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -167,13 +140,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Framework',
 		url: 'https://svelte.jp/',
-		urltext: 'Svelte Official Site',
-		color: 'svelte'
+		urltext: 'Svelte Official Site'
 	},
 	{
 		id: 'react',
-		logo: '',
-		name: 'React',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -184,13 +154,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Library',
 		url: 'https://ja.react.dev/',
-		urltext: 'React Official Site',
-		color: 'react'
+		urltext: 'React Official Site'
 	},
 	{
 		id: 'git',
-		logo: '',
-		name: 'Git',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -201,13 +168,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://git-scm.com/',
-		urltext: 'Git Official Site',
-		color: 'git'
+		urltext: 'Git Official Site'
 	},
 	{
 		id: 'nodejs',
-		logo: '',
-		name: 'Node.js',
 		level: {
 			ja: '初級',
 			en: 'beginner'
@@ -218,13 +182,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://nodejs.org/',
-		urltext: 'Node.js Official Site',
-		color: 'nodejs'
+		urltext: 'Node.js Official Site'
 	},
 	{
 		id: 'vscode',
-		logo: '',
-		name: 'VS Code',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -235,13 +196,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://code.visualstudio.com/',
-		urltext: 'Visual Studio Code Official Site',
-		color: 'vscode'
+		urltext: 'Visual Studio Code Official Site'
 	},
 	{
 		id: 'typst',
-		logo: '',
-		name: 'Typst',
 		level: {
 			ja: '中級',
 			en: 'intermediate'
@@ -252,13 +210,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://typst.app/',
-		urltext: 'Typst Official Site',
-		color: 'typst'
+		urltext: 'Typst Official Site'
 	},
 	{
 		id: 'github',
-		logo: '',
-		name: 'GitHub',
 		level: {
 			ja: '初級',
 			en: 'beginner'
@@ -269,13 +224,10 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://github.com/',
-		urltext: 'GitHub Official Site',
-		color: 'github'
+		urltext: 'GitHub Official Site'
 	},
 	{
 		id: 'docker',
-		logo: '',
-		name: 'Docker',
 		level: {
 			ja: '入門レベル',
 			en: 'introductory'
@@ -286,7 +238,6 @@ export const skillsData: Skill[] = [
 		},
 		group: 'Tools',
 		url: 'https://www.docker.com/',
-		urltext: 'Docker Official Site',
-		color: 'docker'
+		urltext: 'Docker Official Site'
 	}
 ];

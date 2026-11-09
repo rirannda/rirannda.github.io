@@ -1,146 +1,12 @@
 <script lang="ts">
 	import type { Skill } from '$lib/data/skills';
+	import { getTech } from '$lib/data/techs';
+	import TechIcon from './TechIcon.svelte';
 	import { langState } from '$lib/state/langState.svelte';
 
 	let { skill }: { skill: Skill } = $props();
 
-	type SkillColorKey =
-		| 'undefined'
-		| 'html'
-		| 'typescript'
-		| 'javascript'
-		| 'css'
-		| 'python'
-		| 'rust'
-		| 'svelte'
-		| 'react'
-		| 'git'
-		| 'nodejs'
-		| 'windows'
-		| 'linux'
-		| 'archlinux'
-		| 'vscode'
-		| 'typst'
-		| 'github'
-		| 'docker'
-		| 'tailwind'
-		| 'arduino'
-		| 'cpp';
-
-	const colorClasses: Record<
-		SkillColorKey,
-		{ hoverBorder: string; hoverText: string; text: string }
-	> = {
-		undefined: {
-			hoverBorder: 'hover:border-undefined',
-			hoverText: 'group-hover:text-undefined',
-			text: 'text-undefined'
-		},
-		html: {
-			hoverBorder: 'hover:border-html',
-			hoverText: 'group-hover:text-html',
-			text: 'text-html'
-		},
-		typescript: {
-			hoverBorder: 'hover:border-typescript',
-			hoverText: 'group-hover:text-typescript',
-			text: 'text-typescript'
-		},
-		javascript: {
-			hoverBorder: 'hover:border-javascript',
-			hoverText: 'group-hover:text-javascript',
-			text: 'text-javascript'
-		},
-		css: {
-			hoverBorder: 'hover:border-css',
-			hoverText: 'group-hover:text-css',
-			text: 'text-css'
-		},
-		python: {
-			hoverBorder: 'hover:border-python',
-			hoverText: 'group-hover:text-python',
-			text: 'text-python'
-		},
-		rust: {
-			hoverBorder: 'hover:border-rust',
-			hoverText: 'group-hover:text-rust',
-			text: 'text-rust'
-		},
-		svelte: {
-			hoverBorder: 'hover:border-svelte',
-			hoverText: 'group-hover:text-svelte',
-			text: 'text-svelte'
-		},
-		react: {
-			hoverBorder: 'hover:border-react',
-			hoverText: 'group-hover:text-react',
-			text: 'text-react'
-		},
-		git: {
-			hoverBorder: 'hover:border-git',
-			hoverText: 'group-hover:text-git',
-			text: 'text-git'
-		},
-		nodejs: {
-			hoverBorder: 'hover:border-nodejs',
-			hoverText: 'group-hover:text-nodejs',
-			text: 'text-nodejs'
-		},
-		windows: {
-			hoverBorder: 'hover:border-windows',
-			hoverText: 'group-hover:text-windows',
-			text: 'text-windows'
-		},
-		linux: {
-			hoverBorder: 'hover:border-linux',
-			hoverText: 'group-hover:text-linux',
-			text: 'text-linux'
-		},
-		archlinux: {
-			hoverBorder: 'hover:border-archlinux',
-			hoverText: 'group-hover:text-archlinux',
-			text: 'text-archlinux'
-		},
-		vscode: {
-			hoverBorder: 'hover:border-vscode',
-			hoverText: 'group-hover:text-vscode',
-			text: 'text-vscode'
-		},
-		typst: {
-			hoverBorder: 'hover:border-typst',
-			hoverText: 'group-hover:text-typst',
-			text: 'text-typst'
-		},
-		github: {
-			hoverBorder: 'hover:border-github',
-			hoverText: 'group-hover:text-github',
-			text: 'text-github'
-		},
-		docker: {
-			hoverBorder: 'hover:border-docker',
-			hoverText: 'group-hover:text-docker',
-			text: 'text-docker'
-		},
-		tailwind: {
-			hoverBorder: 'hover:border-tailwind',
-			hoverText: 'group-hover:text-tailwind',
-			text: 'text-tailwind'
-		},
-		arduino: {
-			hoverBorder: 'hover:border-arduino',
-			hoverText: 'group-hover:text-arduino',
-			text: 'text-arduino'
-		},
-		cpp: {
-			hoverBorder: 'hover:border-cpp',
-			hoverText: 'group-hover:text-cpp',
-			text: 'text-cpp'
-		}
-	};
-
-	const skillColors = $derived(
-		colorClasses[skill.color as SkillColorKey] ?? colorClasses.undefined
-	);
+	const tech = $derived(getTech(skill.id));
 	const currentLevel = $derived(skill.level[langState.current]);
 	const currentDescription = $derived(skill.description[langState.current]);
 
@@ -182,16 +48,16 @@
 </script>
 
 <button
-	class={`group rounded-lg border-gray-300 bg-white/50 p-2.5 backdrop-blur-sm md:p-5 flex w-full cursor-pointer flex-col border text-left outline-0 transition-all ${skillColors.hoverBorder} dark:border-gray-700 dark:bg-black/20`}
+	class="skill-card group rounded-lg border-gray-300 bg-white/50 p-2.5 backdrop-blur-sm md:p-5 dark:border-gray-700 dark:bg-black/20 flex w-full cursor-pointer flex-col border text-left outline-0 transition-all"
+	style:--tech-color={tech.color}
 	onclick={openModal}
 >
 	<div class="mb-4 gap-1 md:gap-4 flex items-center">
-		<span
-			class={`pr-2 text-2xl md:pr-0 md:text-4xl font-hack transition-colors ${skillColors.hoverText}`}
-			>{skill.logo}</span
-		>
-		<h3 class={`font-mono text-lg font-bold md:text-xl transition-colors ${skillColors.hoverText}`}>
-			{skill.name}
+		<span class="skill-heading pr-2 text-2xl md:pr-0 md:text-4xl transition-colors">
+			<TechIcon icon={tech.icon} />
+		</span>
+		<h3 class="skill-heading font-mono text-lg font-bold md:text-xl transition-colors">
+			{tech.label}
 		</h3>
 	</div>
 
@@ -220,10 +86,10 @@
 	</button>
 
 	<div class="mb-6 gap-4 flex items-center">
-		<span class={`text-6xl font-hack ${skillColors.text}`}>{skill.logo}</span>
+		<span class="text-6xl" style:color={tech.color}><TechIcon icon={tech.icon} /></span>
 		<div class="pl-2">
 			<h3 id="skill-modal-title" class="mb-1 text-2xl font-bold">
-				{skill.name}
+				{tech.label}
 			</h3>
 			<span class="rounded px-2 py-1 text-xs font-semibold text-white inline-block {progressColor}">
 				{currentLevel}
@@ -244,3 +110,15 @@
 		{skill.urltext}
 	</a>
 </dialog>
+
+<style>
+	.skill-card:hover,
+	.skill-card:focus-visible {
+		border-color: var(--tech-color);
+	}
+
+	.skill-card:hover .skill-heading,
+	.skill-card:focus-visible .skill-heading {
+		color: var(--tech-color);
+	}
+</style>
