@@ -87,6 +87,20 @@ export const skillsData: Skill[] = [
 		urltext: 'Python Official Site'
 	},
 	{
+		id: 'scratch',
+		level: {
+			ja: '中級',
+			en: 'intermediate'
+		},
+		description: {
+			ja: '実習などで使用経験あり。',
+			en: 'Experienced in using it during practical training '
+		},
+		group: 'Language',
+		url: 'https://scratch.mit.edu/',
+		urltext: 'Scratch Official Site'
+	},
+	{
 		id: 'arduino',
 		level: {
 			ja: '入門レベル',
@@ -239,5 +253,61 @@ export const skillsData: Skill[] = [
 		group: 'Tools',
 		url: 'https://www.docker.com/',
 		urltext: 'Docker Official Site'
+	},
+	{
+		id: 'arduino-ide',
+		level: {
+			ja: '初級',
+			en: 'beginner'
+		},
+		description: {
+			ja: '実習などで使用経験あり。',
+			en: 'Experienced in using it during practical training.'
+		},
+		group: 'Tools',
+		url: 'https://docs.arduino.cc/software/ide/',
+		urltext: 'Arduino IDE Documentation'
+	},
+	{
+		id: 'zed',
+		level: {
+			ja: '中級',
+			en: 'intermediate'
+		},
+		description: {
+			ja: '日常的に使用しているエディタ。',
+			en: 'Editor I used daily.'
+		},
+		group: 'Tools',
+		url: 'https://zed.dev/',
+		urltext: 'Zed Official Site'
+	},
+	{
+		id: 'wsl',
+		level: {
+			ja: '初級',
+			en: 'beginner'
+		},
+		description: {
+			ja: '一部の開発で使用経験あり。',
+			en: 'Experienced in using it in some projects.'
+		},
+		group: 'Tools',
+		url: 'https://learn.microsoft.com/ja-jp/windows/wsl/about',
+		urltext: 'Microsoft Learn - WSL'
+	},
+	{
+		id: 'realvnc',
+		level: {
+			ja: '初級',
+			en: 'beginner'
+		},
+		description: {
+			ja: '実習で使用経験あり。',
+			en: 'Experienced in using it during practical training '
+		},
+		group: 'Tools',
+		url: 'https://www.realvnc.com/en/connect/',
+		urltext: 'RealVNC Connect Official Site'
 	}
 ];

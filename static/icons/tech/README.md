@@ -1,6 +1,6 @@
 # 技術アイコンの出典
 
-SVG は公式リポジトリから取得し、形状・色を変更せずに同梱しています。
+同梱の画像は公式の配布元から取得しています。フォントアイコンはサイト同梱の Hack Nerd Font から表示します。
 
 ## Leaflet
 
@@ -11,15 +11,28 @@ SVG は公式リポジトリから取得し、形状・色を変更せずに同�
 
 ## Scratch
 
-- 配布元: [scratchfoundation/scratch-gui の scratch-logo.svg](https://github.com/scratchfoundation/scratch-gui/blob/develop/src/components/menu-bar/scratch-logo.svg)
-- 元ファイルの blob SHA: `28b62731df177f732aff99206c29cd0d4b05dfca`
-- 商標の権利者: Scratch Foundation
-- 利用条件: [Scratch Trademark Guidelines](https://mitscratch.freshdesk.com/en/support/solutions/articles/4000232107-scratch-trademark-guidelines)（2026-09-14 更新版）
+- Scratch の「S」単体のマークです。[Scratch 公式サイトのファビコン](https://scratch.mit.edu/favicon.ico)をそのまま同梱しています。
+- 「Scratch S」は Scratch Foundation の商標です。このサイトではスキル欄で Scratch を指し示すために使用します。[商標一覧](https://mitscratch.freshdesk.com/en/support/solutions/articles/4000232108-scratch-foundation-trademarks-list)・[Scratch Trademark Guidelines](https://mitscratch.freshdesk.com/en/support/solutions/articles/4000232107-scratch-trademark-guidelines)
 
-Scratch の使用技術としての説明・参照に使用します。ロゴの改変、自分の製品のアイコンやブランドとしての使用、Scratch Foundation による公式の提携・支援を示唆する表示は行わないでください。ソースコードの AGPL はロゴの商標使用許諾を与えるものではありません。
+## Zed
+
+- 公式配布のロゴマーク SVG をそのまま同梱しています。ライトテーマでは黒、ダークテーマでは白を表示します。[Zed 公式ブランドページの Logomark](https://zed.dev/brand#logomark)
+- Zed の名称とロゴは Zed Industries, Inc. の商標です。エディタを示す目的で使用します。[Zed の商標ガイドライン](https://zed.dev/brand#trademark)
+
+## フォントアイコン
+
+| 技術 | Nerd Fonts のグリフ | 表示内容 |
+| --- | --- | --- |
+| Arduino IDE | `nf-dev-arduino`（U+E733） | Devicons の Arduino マーク。Arduino の項目と共用。 |
+| WSL | `nf-dev-windows`（U+E70F） | Devicons の Windows マーク。既存の WSL 定義を使用。 |
+| RealVNC | `nf-md-remote_desktop`（U+F08B9） | Material Design Icons の汎用リモートデスクトップ記号。 |
+
+[Nerd Fonts のグリフ一覧](https://www.nerdfonts.com/cheat-sheet)・[Material Design Icons の remote-desktop](https://pictogrammers.com/library/mdi/icon/remote-desktop/)
+
+WSL の公式ペンギンアイコンには Microsoft のブランド利用条件が適用されます。このサイトでの使用許可を確認できなかったため、WSL 欄には上記の既存グリフを使います。[WSL の商標に関する記載](https://github.com/microsoft/WSL#trademarks)・[Microsoft Trademark and Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks)
 
 ## 登録方法
 
-色・名前・アイコンは `src/lib/data/techs.ts` に登録します。フォント文字は `icon: ''`、SVG は `icon: { src: '/icons/tech/leaflet.svg' }` の形式です。`src` には利用条件を確認した HTTPS の CDN URL も指定できます。
+色・名前・アイコンは `src/lib/data/techs.ts` に登録します。フォント文字は `icon: ''`、画像は `icon: { src: '/icons/tech/leaflet.svg' }` の形式です。`src` には利用条件を確認した HTTPS の CDN URL も指定できます。
 
-`works.ts` の `tech` は `['svelte', 'leaflet']` のような登録済み ID の配列です。`skills.ts` も同じ ID から名前・色・アイコンを参照します。新しい SVG を追加する際も、このファイルに出典と利用条件を記録してください。
+`works.ts` の `tech` は `['svelte', 'leaflet']` のような登録済み ID の配列です。`skills.ts` も同じ ID から名前・色・アイコンを参照します。新しい画像を追加する際も、このファイルに出典と利用条件を記録してください。

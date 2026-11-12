@@ -11,6 +11,14 @@
 		src={icon.src}
 		alt=""
 		aria-hidden="true"
-		class="inline-block h-[1em] w-auto shrink-0 align-middle"
+		class="inline-block h-[1em] w-auto shrink-0 align-middle {icon.darkSrc ? 'dark:hidden' : ''}"
 	/>
+	{#if icon.darkSrc}
+		<img
+			src={icon.darkSrc}
+			alt=""
+			aria-hidden="true"
+			class="hidden h-[1em] w-auto shrink-0 align-middle dark:inline-block"
+		/>
+	{/if}
 {/if}

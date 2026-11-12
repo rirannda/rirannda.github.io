@@ -3,8 +3,8 @@ export type Tech = {
 	label: string;
 	color: `#${string}`;
 	textColor?: `#${string}`;
-	// フォント文字、またはローカル / CDN の SVG URL。
-	icon: string | { src: string };
+	// フォント文字、またはローカル / CDN の画像 URL。
+	icon: string | { src: string; darkSrc?: string };
 };
 
 export const techs = [
@@ -33,7 +33,15 @@ export const techs = [
 	{ id: 'docker', label: 'Docker', color: '#2560ff', icon: '' },
 	{ id: 'tailwind', label: 'Tailwind CSS', color: '#01bbff', icon: '󱏿' },
 	{ id: 'arduino', label: 'Arduino', color: '#25c2c7', icon: '' },
+	{ id: 'arduino-ide', label: 'Arduino IDE', color: '#25c2c7', icon: '' },
 	{ id: 'wsl', label: 'WSL', color: '#0272ca', icon: '' },
+	{ id: 'realvnc', label: 'RealVNC', color: '#007a82', icon: '󰢹' },
+	{
+		id: 'zed',
+		label: 'Zed',
+		color: '#1348dc',
+		icon: { src: '/icons/tech/zed.svg', darkSrc: '/icons/tech/zed-dark.svg' }
+	},
 	{ id: 'cpp', label: 'C++', color: '#6295cb', icon: '' },
 	{
 		id: 'leaflet',
@@ -46,7 +54,7 @@ export const techs = [
 		label: 'Scratch',
 		color: '#f9a83a',
 		textColor: '#1e1e1e',
-		icon: { src: '/icons/tech/scratch.svg' }
+		icon: { src: '/icons/tech/scratch.ico' }
 	}
 ] as const satisfies readonly Tech[];
 
