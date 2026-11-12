@@ -48,7 +48,7 @@ export const worksData: Work[] = [
 			omuctNaviScreenshot4
 		],
 		description: {
-			ja: '総合課題実習1の!MSチームとして作成した校内案内アプリ。独自に作成したマップと地理データをLeaflet.jsを用いてマップにしている。A*アルゴリズムを用いてルートを探査、そのルートに基づいて案内する。Webページとして公開したバージョンでは、2026年度高専祭のデータを作成し、来場者が使えるようにした。',
+			ja: '総合課題実習1の!MSチームとして作成した校内案内アプリ。マップの作成とUI周りを担当しました。独自に作成したマップと地理データをLeaflet.jsを用いてマップにしています。A*アルゴリズムを用いてルートを探査、そのルートに基づいて案内します。高専祭当日の発表用に2026年度高専祭のデータを作成し、来場者が使えるようにしました。',
 			en: 'A campus navigation app developed by the !MS team as part of Comprehensive Project Practice 1. The app uses Leaflet.js to visualize custom-made maps and geographic data. It implements the A* pathfinding algorithm to calculate routes and provide navigation guidance. For the publicly available web version, we created a dataset for the 2026 Kosen Festival, allowing visitors to navigate the campus.'
 		},
 		tech: ['leaflet', 'svelte', 'typescript'],
