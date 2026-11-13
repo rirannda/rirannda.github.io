@@ -68,6 +68,12 @@
 	class="inset-0 bg-black p-6 font-mono text-white focus-visible:outline-white fixed z-9999 flex cursor-pointer flex-col text-left whitespace-pre focus-visible:outline-2 focus-visible:-outline-offset-4"
 >
 	{#each visibleLines as line, i (i)}
-		<span>{line}</span>
+		<span
+			class={line.startsWith('Tips:')
+				? 'sm:max-w-none sm:whitespace-pre max-w-[30ch] whitespace-normal'
+				: ''}
+		>
+			{line}
+		</span>
 	{/each}
 </button>
